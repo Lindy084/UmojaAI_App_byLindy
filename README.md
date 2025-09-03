@@ -55,10 +55,6 @@ For questions, feedback, or collaboration:
 * **GitHub:** (https://github.com/Lindy084/UmojaAI)
 * **Linkedin:** (https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229) 
 
----
 
-## **License**
-
-This project is licensed under the MIT License – see the [LICENSE](LICENSE) file for details.
 
 
