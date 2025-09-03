@@ -12,6 +12,13 @@ from PIL import Image
 # Setup
 # ------------------------
 load_dotenv()
+st.set_page_config(
+    page_title="UmojaAI · Streamlit",
+    page_icon="images/logo.png",  # path to your logo
+    layout="wide"
+)
+
+st.sidebar.image("images/logo.png", width=120)
 st.set_page_config(page_title="UmojaAI · Streamlit", page_icon="🤖", layout="wide")
 
 # ------------------------
@@ -647,6 +654,7 @@ with tabs[6]:
     )
    
     
+
 
 
 
