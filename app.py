@@ -1,37 +1,30 @@
 import os
-import os
-from dotenv import load_dotenv
-
-load_dotenv()  # make sure this is at the top of your file
-
-API_KEY = os.getenv("OPENROUTER_API_KEY")
 import base64
 import requests
 import streamlit as st
-import streamlit as st
-# your other imports (like call_openrouter, etc.)
-
-# Add these for PDF download
+from dotenv import load_dotenv
 from io import BytesIO
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
-
+from PIL import Image
 
 # ------------------------
-# App Setup
+# Setup
 # ------------------------
+load_dotenv()
 st.set_page_config(page_title="UmojaAI · Streamlit", page_icon="🤖", layout="wide")
 
 # ------------------------
-# API Key (Hardcoded)
+# API Configuration
 # ------------------------
-# ⚠️ Important: Do NOT commit this file to public GitHub with your real key inside.
-# This is only safe for local/private use.
-OPENROUTER_API_KEY = "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"
-
+OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 
 def call_openrouter(model: str, messages: list, **kwargs):
+    """Call the OpenRouter API safely"""
+    if not OPENROUTER_API_KEY:
+        raise ValueError("❌ API Key not found. Please set OPENROUTER_API_KEY in your Streamlit secrets.")
+
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {OPENROUTER_API_KEY}",
@@ -47,10 +40,6 @@ def call_openrouter(model: str, messages: list, **kwargs):
         if choices and "message" in choices[0]:
             content = choices[0]["message"].get("content")
     return content, data
-
-def b64_data_url(file_bytes: bytes, mime: str) -> str:
-    b64 = base64.b64encode(file_bytes).decode("utf-8")
-    return f"data:{mime};base64,{b64}"
 
 # ------------------------
 # UI
@@ -658,4 +647,5 @@ with tabs[6]:
     )
    
     
+
 
