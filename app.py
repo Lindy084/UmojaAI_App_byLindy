@@ -53,7 +53,7 @@ def call_openrouter(model: str, messages: list, **kwargs):
 # ------------------------
 UI = {
     "en": {
-        "title": "Welcome to UmojaAI By Lindiwe Ndlazi",
+        "title": "Welcome to UmojaAI_App By Lindiwe Ndlazi",
         "tagline": "UmojaAI provides intelligent, accessible AI tools designed to empower individuals to reach their full potential, educate communities with clear and practical knowledge, and foster a truly inclusive environment where people from all backgrounds can learn, create, and thrive together.",
         "tabs": ["🤖 Chatbot", "📝 Summarizer", "🌐 Translator", "🖼️ Image Captioning", "📚 AI Knowledge Quiz", "🌍 Story", "📞 Contact"],
         "contact": {
@@ -654,6 +654,7 @@ with tabs[6]:
     )
    
     
+
 
 
 
