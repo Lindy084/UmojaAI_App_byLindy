@@ -535,7 +535,7 @@ with tabs[4]:  # Tab 4 for Quiz
         c.saveState()
         c.translate(width/2 - 150, height/2 - 50)
         c.rotate(30)
-        c.drawCentredString(0, 0, "UmojaAI")
+        c.drawCentredString(0, 0, "UmojaAI", "UmojaAI","UmojaAI")
         c.restoreState()
         c.setFillColor(colors.black)
 
@@ -647,5 +647,6 @@ with tabs[6]:
     )
    
     
+
 
 
