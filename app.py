@@ -59,11 +59,11 @@ UI = {
         "contact": {
             "email": "ndlazilindy22@gmail.com",
             "phone": "+27 617150448",
-            "socials": {
-                "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229"
-            }
-        }
-    },
+         contact = {
+    "socials": {
+        "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229"
+    }
+},
     "zu": {
         "title": "Siyakwamukela ku-UmojaAI",
         "tagline": "Amathuluzi e-AI aqinisa, afundisa, futhi afaka bonke.",
@@ -71,11 +71,11 @@ UI = {
         "contact": {
             "email": "ndlazilindy22@gmail.com",
             "phone": "+27 617150448",
-            "socials": {
-                "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229"
-            }
-        }
-    },
+      contact = {
+    "socials": {
+        "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229"
+    }
+},
     "isiXhosa": {
         "title": "Wamkelekile e-UmojaAI",
         "tagline": "Izixhobo ze-AI ezinamandla, ezifundisayo nezibandakanya wonke umntu.",
@@ -83,10 +83,11 @@ UI = {
         "contact": {
             "email": "ndlazilindy22@gmail.com",
             "phone": "+27 617150448",
-            "socials": {
-                "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229"
-            }
-        }
+    contact = {
+    "socials": {
+        "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229"
+       }
+     
     },
     "seSotho": {
         "title": "Rea u amohela ho UmojaAI",
@@ -96,11 +97,11 @@ UI = {
         "contact": {
             "email": "ndlazilindy22@gmail.com",
             "phone": "+27 617150448",
-            "socials": {
-                "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229"
-            }
-        }
-    },
+   contact = {
+    "socials": {
+        "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229"
+    }
+},
     "Tswana": {
         "title": "O amogetswe mo UmojaAI",
         "tagline": "Didiriswa tsa AI tse nonotshang, tse rutang le go akaretsa botlhe.",
@@ -108,11 +109,11 @@ UI = {
         "contact": {
             "email": "ndlazilindy22@gmail.com",
             "phone": "+27 617150448",
-            "socials": {
-                "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229"
-            }
-        }
-    },
+    contact = {
+    "socials": {
+        "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229"
+    }
+},
     "Tsonga": {
         "title": "Amukela eka UmojaAI",
         "tagline": "Switirhisiwa swa AI leswi tiyisaka, leswi dyondzisaka naswona swi akareta hinkwavo.",
@@ -121,11 +122,11 @@ UI = {
         "contact": {
             "email": "contact@umojaai.com",
             "phone": "+27 617150448",
-            "socials": {
-                "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229"
-            }
-        }
-    },
+    contact = {
+    "socials": {
+        "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229"
+    }
+},
     "siSwati": {
         "title": "Uyemukelwa ku-UmojaAI",
         "tagline": "Amathuluzi e-AI lakhulisa, afundzisa futsi afaka wonkhe muntfu.",
@@ -134,11 +135,11 @@ UI = {
         "contact": {
             "email": "ndlazilindy22@gmail.com",
             "phone": "+27 617150448",
-            "socials": {
-                "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229"
-            }
-        }
-    },
+   contact = {
+    "socials": {
+        "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229"
+    }
+},
     "Venda": {
         "title": "U amukedzwa kha UmojaAI",
         "tagline": "Zwishumiswa zwa AI zwi khwaṱhisedzaho, zwi funzishaho na u shumisa muṅwe na muṅwe.",
@@ -147,11 +148,11 @@ UI = {
         "contact": {
             "email": "ndlazilindy22@gmail.com",
             "phone": "+27 617150448",
-            "socials": {
-                "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229"
-            }
-        }
-    },
+     contact = {
+    "socials": {
+        "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229"
+    }
+},
     "isiNdebele": {
         "title": "Wamukelekile e-UmojaAI",
         "tagline": "Amathuluzi e-AI aqinisa, afundisa futhi afaka bonke abantu.",
@@ -174,11 +175,11 @@ UI = {
         "contact": {
             "email": "ndlazilindy22@gmail.com",
             "phone": "+27 617150448",
-            "socials": {
-                "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229"
-            }
-        }
-    },
+      contact = {
+    "socials": {
+        "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229"
+    }
+},
     "Afrikaans": {
         "title": "Welkom by UmojaAI",
         "tagline": "AI-hulpmiddels wat bemagtig, opvoed en insluitend is.",
@@ -187,12 +188,11 @@ UI = {
         "contact": {
             "email": "ndlazilindy22@gmail.com",
             "phone": "061715048",
-            "socials": {
-                "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229"
-            }
-        }
+   contact = {
+    "socials": {
+        "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229"
     }
-}
+},
 
 lang = st.sidebar.selectbox("Language", list(UI.keys()), format_func=lambda k: {"en": "English", "zu": "isiZulu"}.get(k, k), index=0)
 ui = UI.get(lang, UI["en"])
@@ -662,6 +662,7 @@ with tabs[6]:
     
    
     
+
 
 
 
