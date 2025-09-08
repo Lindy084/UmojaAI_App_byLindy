@@ -60,7 +60,7 @@ UI = {
             "email": "ndlazilindy22@gmail.com",
             "phone": "+27 617150448",
             "socials": {
-                "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229/"
+                "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229"
             }
         }
     },
@@ -72,7 +72,7 @@ UI = {
             "email": "ndlazilindy22@gmail.com",
             "phone": "+27 617150448",
             "socials": {
-                "linkedin": "https//www.linkedin.com/in/ndlazi-lindiwe-76baa6229/"
+                "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229"
             }
         }
     },
@@ -84,7 +84,7 @@ UI = {
             "email": "ndlazilindy22@gmail.com",
             "phone": "+27 617150448",
             "socials": {
-                "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229/"
+                "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229"
             }
         }
     },
@@ -97,7 +97,7 @@ UI = {
             "email": "ndlazilindy22@gmail.com",
             "phone": "+27 617150448",
             "socials": {
-                "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229/"
+                "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229"
             }
         }
     },
@@ -109,7 +109,7 @@ UI = {
             "email": "ndlazilindy22@gmail.com",
             "phone": "+27 617150448",
             "socials": {
-                "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229/"
+                "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229"
             }
         }
     },
@@ -122,7 +122,7 @@ UI = {
             "email": "contact@umojaai.com",
             "phone": "+27 617150448",
             "socials": {
-                "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229/"
+                "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229"
             }
         }
     },
@@ -135,7 +135,7 @@ UI = {
             "email": "ndlazilindy22@gmail.com",
             "phone": "+27 617150448",
             "socials": {
-                "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229/"
+                "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229"
             }
         }
     },
@@ -148,7 +148,7 @@ UI = {
             "email": "ndlazilindy22@gmail.com",
             "phone": "+27 617150448",
             "socials": {
-                "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229/"
+                "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229"
             }
         }
     },
@@ -162,7 +162,7 @@ UI = {
             "email": "ndlazilindy22@gmail.com",
             "phone": "+27 617150448",
             "socials": {
-                "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229/"
+                "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229"
             }
         }
     },
@@ -175,7 +175,7 @@ UI = {
             "email": "ndlazilindy22@gmail.com",
             "phone": "+27 617150448",
             "socials": {
-                "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229/"
+                "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229"
             }
         }
     },
@@ -188,7 +188,7 @@ UI = {
             "email": "ndlazilindy22@gmail.com",
             "phone": "061715048",
             "socials": {
-                "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229/"
+                "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229"
             }
         }
     }
@@ -654,6 +654,7 @@ with tabs[6]:
     )
    
     
+
 
 
 
