@@ -647,9 +647,14 @@ with tabs[6]:
     
     st.write(f"📧 Email: {contact.get('email', 'N/A')}")
     st.write(f"📞 Phone: {contact.get('phone', 'N/A')}")
+
+ socials = contact.get("socials", {})
+    st.write(
+        f"LinkedIn: (https://{socials.get('linkedin','')})"
+    )
+   
     
-    # Display LinkedIn link correctly
-st.write(f"LinkedIn: [{socials['linkedin']}]({socials['linkedin']})")
+    
    
     
 
