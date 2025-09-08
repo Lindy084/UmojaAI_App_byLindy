@@ -648,6 +648,12 @@ with tabs[6]:
     st.write(f"📧 Email: {contact.get('email', 'N/A')}")
     st.write(f"📞 Phone: {contact.get('phone', 'N/A')}")
 
+     socials = contact.get("socials", {})
+    st.write(
+        f"LinkedIn: [{socials.get('linkedin','')}](https://{socials.get('linkedin','')})"
+    )
+   
+
 
     )
    
@@ -656,6 +662,7 @@ with tabs[6]:
     
    
     
+
 
 
 
