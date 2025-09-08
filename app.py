@@ -71,7 +71,6 @@ UI = {
         "contact": {
             "email": "ndlazilindy22@gmail.com",
             "phone": "+27 617150448",
-      contact = {
     "socials": {
         "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229"
     }
@@ -83,7 +82,6 @@ UI = {
         "contact": {
             "email": "ndlazilindy22@gmail.com",
             "phone": "+27 617150448",
-    contact = {
     "socials": {
         "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229"
        }
@@ -97,7 +95,6 @@ UI = {
         "contact": {
             "email": "ndlazilindy22@gmail.com",
             "phone": "+27 617150448",
-   contact = {
     "socials": {
         "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229"
     }
@@ -109,7 +106,6 @@ UI = {
         "contact": {
             "email": "ndlazilindy22@gmail.com",
             "phone": "+27 617150448",
-    contact = {
     "socials": {
         "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229"
     }
@@ -122,7 +118,6 @@ UI = {
         "contact": {
             "email": "contact@umojaai.com",
             "phone": "+27 617150448",
-    contact = {
     "socials": {
         "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229"
     }
@@ -135,7 +130,6 @@ UI = {
         "contact": {
             "email": "ndlazilindy22@gmail.com",
             "phone": "+27 617150448",
-   contact = {
     "socials": {
         "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229"
     }
@@ -148,7 +142,6 @@ UI = {
         "contact": {
             "email": "ndlazilindy22@gmail.com",
             "phone": "+27 617150448",
-     contact = {
     "socials": {
         "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229"
     }
@@ -175,7 +168,6 @@ UI = {
         "contact": {
             "email": "ndlazilindy22@gmail.com",
             "phone": "+27 617150448",
-      contact = {
     "socials": {
         "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229"
     }
@@ -188,7 +180,6 @@ UI = {
         "contact": {
             "email": "ndlazilindy22@gmail.com",
             "phone": "061715048",
-   contact = {
     "socials": {
         "linkedin": "https://www.linkedin.com/in/ndlazi-lindiwe-76baa6229"
     }
@@ -644,24 +635,23 @@ can harness the power of AI to learn, grow, and succeed in today’s digital and
 with tabs[6]:
     st.subheader("Contact Us")
     contact = ui.get("contact", {})
-    
+
     st.write(f"📧 Email: {contact.get('email', 'N/A')}")
     st.write(f"📞 Phone: {contact.get('phone', 'N/A')}")
 
-     socials = contact.get("socials", {})
-    st.write(
-        f"LinkedIn: [{socials.get('linkedin','')}](https://{socials.get('linkedin','')})"
-    )
-   
+    socials = contact.get("socials", {})
+    linkedin_url = socials.get("linkedin", "")
+    if linkedin_url:
+        st.write(f"🔗 LinkedIn: [{linkedin_url}]({linkedin_url})")
 
+    
+   
+   
+    
+    
+   
+    
 
-    )
-   
-   
-    
-    
-   
-    
 
 
 
