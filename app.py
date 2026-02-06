@@ -483,7 +483,7 @@ with tabs[4]:  # Tab 4 for Quiz
         if user_answer == q["answer"]:
             user_score += 1
 
-   if st.button("Submit Quiz"):
+  if st.button("Submit Quiz"):
     st.markdown("---")
     st.markdown(f"### Your Score: {user_score}/{len(quiz)}")
     passing_score = int(0.6 * len(quiz))  # 60% pass threshold
@@ -495,7 +495,9 @@ with tabs[4]:  # Tab 4 for Quiz
         st.error("😢 Sorry, you did not pass.")
         passed = False
 
-    # PDF generation
+    # -------------------------
+    # PDF Generation
+    # -------------------------
     from reportlab.lib.pagesizes import letter
     from reportlab.pdfgen import canvas
     from reportlab.lib import colors
@@ -507,21 +509,20 @@ with tabs[4]:  # Tab 4 for Quiz
     c = canvas.Canvas(pdf_buffer, pagesize=letter)
     width, height = letter
 
-    # -------------------------
     # Background & Borders
-    # -------------------------
     c.setFillColorRGB(1, 0.992, 0.925)  # cream-white
     c.rect(0, 0, width, height, fill=1, stroke=0)
 
-    c.setStrokeColorRGB(0.4, 0.26, 0.13)  # brown
+    # Outer border - brown
+    c.setStrokeColorRGB(0.4, 0.26, 0.13)
     c.setLineWidth(5)
     c.rect(20, 20, width-40, height-40)
+
+    # Inner border - brown thinner
     c.setLineWidth(2)
     c.rect(35, 35, width-70, height-70)
 
-    # -------------------------
     # Header / Issuer
-    # -------------------------
     c.setFont("Times-Bold", 22)
     c.setFillColorRGB(0.0, 0.2, 0.0)  # dark green
     c.drawCentredString(width/2, height - 70, "UmojaAI – Career Bridge Initiative")
@@ -531,9 +532,7 @@ with tabs[4]:  # Tab 4 for Quiz
     c.drawCentredString(width/2, height - 90,
                         "An AI-powered career guidance and digital skills initiative")
 
-    # -------------------------
     # Watermark
-    # -------------------------
     c.saveState()
     c.setFont("Helvetica-Bold", 50)
     c.setFillColorRGB(0.9, 0.9, 0.9)
@@ -543,16 +542,12 @@ with tabs[4]:  # Tab 4 for Quiz
     c.restoreState()
 
     if passed:
-        # -------------------------
         # Certificate Title
-        # -------------------------
         c.setFont("Times-Bold", 34)
         c.setFillColorRGB(0.0, 0.2, 0.0)
         c.drawCentredString(width/2, height - 150, "Certificate of Achievement")
 
-        # -------------------------
         # Awardee Info
-        # -------------------------
         c.setFont("Helvetica", 16)
         c.setFillColorRGB(0, 0, 0)
         c.drawCentredString(width/2, height - 200, "This certificate is proudly awarded to")
@@ -560,9 +555,7 @@ with tabs[4]:  # Tab 4 for Quiz
         c.setFont("Times-Bold", 26)
         c.drawCentredString(width/2, height - 250, name)
 
-        # -------------------------
         # Achievement Description
-        # -------------------------
         c.setFont("Helvetica", 16)
         c.drawCentredString(width/2, height - 300,
                             "For successfully demonstrating foundational knowledge in Artificial Intelligence")
@@ -571,16 +564,12 @@ with tabs[4]:  # Tab 4 for Quiz
                             f"Date: {datetime.date.today().strftime('%B %d, %Y')}")
         c.drawCentredString(width/2, height - 380, "Issued in South Africa")
 
-        # -------------------------
         # Certificate ID
-        # -------------------------
         cert_id = f"UBC-{datetime.date.today().strftime('%Y%m%d')}-{random.randint(1000,9999)}"
         c.setFont("Helvetica-Oblique", 10)
         c.drawRightString(width - 40, 40, f"Certificate ID: {cert_id}")
 
-        # -------------------------
         # Signature
-        # -------------------------
         c.setStrokeColorRGB(0.4, 0.26, 0.13)  # brown line
         c.line(80, 90, 280, 90)
         c.setFont("Helvetica-BoldOblique", 12)
@@ -590,9 +579,7 @@ with tabs[4]:  # Tab 4 for Quiz
         c.drawString(120, 76, "Programme Lead, UmojaAI – Career Bridge Initiative")
 
     else:
-        # -------------------------
         # Quiz Results PDF
-        # -------------------------
         c.setFont("Helvetica-Bold", 20)
         c.drawCentredString(width/2, height - 100, "Quiz Results")
         c.setFont("Helvetica", 14)
@@ -612,7 +599,6 @@ with tabs[4]:  # Tab 4 for Quiz
 
     c.save()
     pdf_buffer.seek(0)
-
 
         # Step 5: Download button
         if passed:
@@ -679,6 +665,7 @@ with tabs[6]:
     
    
     
+
 
 
 
