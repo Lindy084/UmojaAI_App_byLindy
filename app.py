@@ -434,209 +434,199 @@ with tabs[3]:
                     # ------------------------
                     # ------------------------
 # ------------------------
-# 📚 AI Knowledge Quiz
+# 📚 AI Knowledge Quiz App
 # ------------------------
-with tabs[4]:  # Tab 4 for Quiz
-    st.subheader("📚 AI Knowledge Quiz")
+st.set_page_config(page_title="AI Knowledge Quiz", layout="wide")
 
-    # Step 1: User details
-    st.markdown("### Enter Your Details")
-    name = st.text_input("Full Name & Surname")
-    email = st.text_input("Email Address")
+st.title("📚 AI Knowledge Quiz")
 
-    st.markdown("---")
-    st.markdown("### Select Topic")
-    topics = ["General AI", "Machine Learning", "Natural Language Processing"]
-    selected_topic = st.selectbox("Choose a topic:", topics)
+# Step 1: User details
+st.subheader("Enter Your Details")
+name = st.text_input("Full Name & Surname")
+email = st.text_input("Email Address")
 
-    st.markdown("### Quiz Instructions")
-    st.write("Select the correct answer for each question. A score of 60% or higher is required to pass.")
+st.markdown("---")
+st.subheader("Quiz Instructions")
+st.write("Select the correct answer for each question. A score of 60% or higher is required to pass.")
 
-    # ------------------------
-    # Step 2: Questions per topic
-    # ------------------------
-    all_quizzes = {
-        "General AI": [
-            {"question": "What does AI stand for?", "options": ["Artificial Intelligence", "Automated Internet", "Artificial Integration", "Algorithmic Input"], "answer": "Artificial Intelligence"},
-            {"question": "Which language is most used for AI?", "options": ["Python", "HTML", "CSS", "SQL"], "answer": "Python"},
-            {"question": "Which of these is a type of AI?", "options": ["Narrow AI", "General AI", "Super AI", "All of the above"], "answer": "All of the above"},
-            {"question": "Who coined the term 'Artificial Intelligence'?", "options": ["Alan Turing", "John McCarthy", "Geoffrey Hinton", "Andrew Ng"], "answer": "John McCarthy"},
-            {"question": "Which AI can perform any intellectual task?", "options": ["Narrow AI", "General AI", "Machine Learning", "Deep Learning"], "answer": "General AI"},
-            {"question": "AI can be categorized into?", "options": ["Weak AI", "Strong AI", "Both", "None"], "answer": "Both"},
-            {"question": "Which AI application is voice recognition?", "options": ["Narrow AI", "General AI", "Strong AI", "Reinforcement AI"], "answer": "Narrow AI"},
-            {"question": "AI is related to?", "options": ["Algorithms", "Data", "Computing", "All of the above"], "answer": "All of the above"},
-            {"question": "Which AI is used in self-driving cars?", "options": ["Narrow AI", "General AI", "Machine Learning", "All of the above"], "answer": "All of the above"},
-            {"question": "AI is a field of?", "options": ["Computer Science", "Biology", "Chemistry", "Physics"], "answer": "Computer Science"},
-            {"question": "AI systems can learn from?", "options": ["Data", "Experience", "Both", "None"], "answer": "Both"},
-            {"question": "Which AI can surpass human intelligence?", "options": ["Narrow AI", "General AI", "Super AI", "Weak AI"], "answer": "Super AI"},
-            {"question": "AI uses which type of models?", "options": ["Mathematical", "Statistical", "Algorithmic", "All of the above"], "answer": "All of the above"},
-            {"question": "The Turing Test checks for?", "options": ["Machine intelligence", "Human intelligence", "Computer speed", "Data accuracy"], "answer": "Machine intelligence"},
-            {"question": "Which AI is best for specific tasks?", "options": ["Narrow AI", "General AI", "Super AI", "Weak AI"], "answer": "Narrow AI"},
-        ],
-        "Machine Learning": [
-            {"question": "What is supervised learning?", "options": ["Learning with labeled data", "Learning without data", "Learning randomly", "All of the above"], "answer": "Learning with labeled data"},
-            {"question": "What is unsupervised learning?", "options": ["Learning with unlabeled data", "Learning with labels", "Reinforcement learning", "Deep learning"], "answer": "Learning with unlabeled data"},
-            {"question": "What is overfitting?", "options": ["Model performs well on training but poorly on new data", "Model is perfect", "Model underperforms everywhere", "None"], "answer": "Model performs well on training but poorly on new data"},
-            {"question": "Which algorithm is for regression?", "options": ["Linear Regression", "Decision Tree", "K-Means", "PCA"], "answer": "Linear Regression"},
-            {"question": "Which algorithm is unsupervised?", "options": ["K-Means", "Linear Regression", "Logistic Regression", "SVM"], "answer": "K-Means"},
-            {"question": "Which library is for ML in Python?", "options": ["scikit-learn", "Flask", "Django", "BeautifulSoup"], "answer": "scikit-learn"},
-            {"question": "Which is a type of neural network?", "options": ["Convolutional Neural Network", "Random Forest", "Decision Tree", "Linear Regression"], "answer": "Convolutional Neural Network"},
-            {"question": "What is reinforcement learning?", "options": ["Learning by trial and error", "Learning with labels", "Random learning", "All of the above"], "answer": "Learning by trial and error"},
-            {"question": "Feature scaling helps with?", "options": ["Faster convergence", "Better accuracy", "Both", "None"], "answer": "Both"},
-            {"question": "Overfitting can be reduced by?", "options": ["Regularization", "More data", "Dropout", "All of the above"], "answer": "All of the above"},
-            {"question": "What is cross-validation?", "options": ["Technique to evaluate model", "Model training", "Hyperparameter tuning", "None"], "answer": "Technique to evaluate model"},
-            {"question": "Which ML type uses rewards?", "options": ["Reinforcement Learning", "Supervised", "Unsupervised", "All"], "answer": "Reinforcement Learning"},
-            {"question": "Which is a loss function?", "options": ["Mean Squared Error", "Accuracy", "Precision", "Recall"], "answer": "Mean Squared Error"},
-            {"question": "Which is a classification algorithm?", "options": ["Logistic Regression", "Linear Regression", "PCA", "K-Means"], "answer": "Logistic Regression"},
-            {"question": "Which is used for dimensionality reduction?", "options": ["PCA", "SVM", "Decision Tree", "Random Forest"], "answer": "PCA"},
-        ],
-        "Natural Language Processing": [
-            {"question": "What is NLP?", "options": ["Natural Language Processing", "New Learning Protocol", "Neural Logic Programming", "Network Language Processing"], "answer": "Natural Language Processing"},
-            {"question": "Tokenization means?", "options": ["Splitting text into words/tokens", "Combining sentences", "Translating text", "Encoding images"], "answer": "Splitting text into words/tokens"},
-            {"question": "Stemming removes?", "options": ["Word suffixes", "Numbers", "Punctuation", "Spaces"], "answer": "Word suffixes"},
-            {"question": "Lemmatization keeps?", "options": ["Root form of words", "Full sentence", "Tokens", "Stopwords"], "answer": "Root form of words"},
-            {"question": "What is a stopword?", "options": ["Common word removed from analysis", "Keyword", "Sentence", "Paragraph"], "answer": "Common word removed from analysis"},
-            {"question": "Which library is for NLP in Python?", "options": ["NLTK", "NumPy", "Pandas", "Matplotlib"], "answer": "NLTK"},
-            {"question": "Word embeddings represent?", "options": ["Words as vectors", "Numbers", "Strings", "Images"], "answer": "Words as vectors"},
-            {"question": "POS tagging is?", "options": ["Part-of-speech tagging", "Predictive modeling", "Clustering", "Tokenization"], "answer": "Part-of-speech tagging"},
-            {"question": "NER stands for?", "options": ["Named Entity Recognition", "Neural Encoding Regression", "Natural Evaluation Rate", "None"], "answer": "Named Entity Recognition"},
-            {"question": "Bag-of-words model is?", "options": ["Text representation", "Image model", "Audio model", "Database model"], "answer": "Text representation"},
-            {"question": "TF-IDF measures?", "options": ["Importance of a word in a document", "Word frequency only", "Sentence length", "Token count"], "answer": "Importance of a word in a document"},
-            {"question": "Language models predict?", "options": ["Next word in sequence", "Document length", "Sentence grammar", "Paragraph topic"], "answer": "Next word in sequence"},
-            {"question": "Which model is transformer-based?", "options": ["BERT", "Word2Vec", "GloVe", "TF-IDF"], "answer": "BERT"},
-            {"question": "Sentiment analysis detects?", "options": ["Emotion in text", "Language type", "Word count", "Topic"], "answer": "Emotion in text"},
-            {"question": "Which task is sequence labeling?", "options": ["NER", "Summarization", "Translation", "POS tagging"], "answer": "NER"},
-        ]
-    }
+# ------------------------
+# Step 2: Topics & Questions
+# ------------------------
+topics = {
+    "AI Basics": [
+        {"question": "What does AI stand for?", "options": ["Artificial Intelligence", "Automated Internet", "Artificial Integration", "Algorithmic Input"], "answer": "Artificial Intelligence"},
+        {"question": "Which language is commonly used for AI development?", "options": ["Python", "HTML", "CSS", "SQL"], "answer": "Python"},
+        {"question": "What is supervised learning?", "options": ["Learning with labeled data", "Learning without data", "Learning from mistakes only", "Learning without supervision"], "answer": "Learning with labeled data"},
+        {"question": "What is an algorithm?", "options": ["Step-by-step instructions", "A programming language", "A type of AI model", "A dataset"], "answer": "Step-by-step instructions"},
+        {"question": "Which AI technique is used for predictions?", "options": ["Machine Learning", "Manual Programming", "Graphic Design", "SQL Queries"], "answer": "Machine Learning"},
+        {"question": "Which AI is designed to mimic human thinking?", "options": ["Cognitive AI", "Reactive AI", "Strong AI", "Narrow AI"], "answer": "Cognitive AI"},
+        {"question": "Which AI is specialized in one task?", "options": ["Narrow AI", "Strong AI", "General AI", "Super AI"], "answer": "Narrow AI"},
+        {"question": "What does NLP stand for?", "options": ["Natural Language Processing", "New Learning Protocol", "Neural Logic Programming", "Network Language Processing"], "answer": "Natural Language Processing"},
+        {"question": "Which is an example of AI in daily life?", "options": ["Chatbots", "Cars", "Books", "Pencils"], "answer": "Chatbots"},
+        {"question": "Which data is used for supervised learning?", "options": ["Labeled data", "Unlabeled data", "Random data", "No data"], "answer": "Labeled data"},
+        {"question": "What is reinforcement learning?", "options": ["Learning by reward and punishment", "Learning with labeled data", "Learning without data", "Learning by copying"], "answer": "Learning by reward and punishment"},
+        {"question": "Which AI model is used for image recognition?", "options": ["CNN", "RNN", "LSTM", "Decision Tree"], "answer": "CNN"},
+        {"question": "Which is an AI programming library?", "options": ["TensorFlow", "Excel", "Photoshop", "PowerPoint"], "answer": "TensorFlow"},
+        {"question": "Which AI technique generates new data?", "options": ["Generative AI", "Supervised AI", "Reactive AI", "Narrow AI"], "answer": "Generative AI"},
+        {"question": "Which AI mimics human intelligence fully?", "options": ["Strong AI", "Narrow AI", "Weak AI", "Reactive AI"], "answer": "Strong AI"},
+    ],
+    "Machine Learning": [
+        {"question": "Which algorithm is used for classification?", "options": ["Decision Tree", "K-Means", "PCA", "Linear Regression"], "answer": "Decision Tree"},
+        {"question": "Which algorithm is used for regression?", "options": ["Linear Regression", "Naive Bayes", "KNN", "SVM"], "answer": "Linear Regression"},
+        {"question": "What is overfitting?", "options": ["Model fits training data too well", "Model predicts perfectly on new data", "Model ignores training data", "Model underperforms"], "answer": "Model fits training data too well"},
+        {"question": "What is underfitting?", "options": ["Model is too simple", "Model is too complex", "Model predicts perfectly", "Model memorizes data"], "answer": "Model is too simple"},
+        {"question": "Which is unsupervised learning?", "options": ["Clustering", "Linear Regression", "Logistic Regression", "Decision Tree"], "answer": "Clustering"},
+        {"question": "Which is a supervised learning algorithm?", "options": ["SVM", "K-Means", "PCA", "DBSCAN"], "answer": "SVM"},
+        {"question": "What is reinforcement learning?", "options": ["Learning by reward and punishment", "Learning from labeled data", "Clustering data", "Reducing dimensionality"], "answer": "Learning by reward and punishment"},
+        {"question": "Which metric measures classification performance?", "options": ["Accuracy", "Loss", "Mean Squared Error", "R-Squared"], "answer": "Accuracy"},
+        {"question": "Which metric measures regression performance?", "options": ["MSE", "Accuracy", "F1 Score", "Precision"], "answer": "MSE"},
+        {"question": "Which method prevents overfitting?", "options": ["Regularization", "Clustering", "Gradient Boosting", "PCA"], "answer": "Regularization"},
+        {"question": "What is a neural network?", "options": ["Layers of interconnected nodes", "Database", "Spreadsheet", "Image filter"], "answer": "Layers of interconnected nodes"},
+        {"question": "Which is a deep learning framework?", "options": ["PyTorch", "Excel", "SQL", "HTML"], "answer": "PyTorch"},
+        {"question": "Which activation function outputs 0 or 1?", "options": ["Sigmoid", "ReLU", "Tanh", "Softmax"], "answer": "Sigmoid"},
+        {"question": "Which ML technique reduces dimensionality?", "options": ["PCA", "KNN", "SVM", "Decision Tree"], "answer": "PCA"},
+        {"question": "Which algorithm groups similar data points?", "options": ["K-Means", "Linear Regression", "Decision Tree", "Random Forest"], "answer": "K-Means"},
+    ],
+    "Responsible AI": [
+        {"question": "What is bias in AI?", "options": ["Unfair outcomes", "Correct predictions", "Faster processing", "More accuracy"], "answer": "Unfair outcomes"},
+        {"question": "Which principle promotes fairness?", "options": ["Fairness", "Speed", "Scalability", "Complexity"], "answer": "Fairness"},
+        {"question": "What is explainability?", "options": ["Ability to understand AI decisions", "AI speed", "AI size", "AI color"], "answer": "Ability to understand AI decisions"},
+        {"question": "What is transparency in AI?", "options": ["Open understanding of AI logic", "AI secret codes", "Hidden processes", "Closed systems"], "answer": "Open understanding of AI logic"},
+        {"question": "Which tool audits AI for bias?", "options": ["IBM AI Fairness 360", "Photoshop", "Excel", "TensorFlow"], "answer": "IBM AI Fairness 360"},
+        {"question": "Which is NOT a Responsible AI principle?", "options": ["Dishonesty", "Fairness", "Transparency", "Accountability"], "answer": "Dishonesty"},
+        {"question": "Which helps mitigate bias?", "options": ["Bias detection & mitigation strategies", "Random guessing", "Ignoring data", "Speed optimization"], "answer": "Bias detection & mitigation strategies"},
+        {"question": "What is accountability in AI?", "options": ["Being responsible for AI outcomes", "Faster computation", "Memory usage", "Code optimization"], "answer": "Being responsible for AI outcomes"},
+        {"question": "Which AI can harm society if unchecked?", "options": ["Unethical AI", "Supervised AI", "Reactive AI", "Narrow AI"], "answer": "Unethical AI"},
+        {"question": "Which ensures AI follows laws?", "options": ["Regulations & policies", "Neural networks", "Gradient descent", "Data cleaning"], "answer": "Regulations & policies"},
+        {"question": "What is privacy in AI?", "options": ["Protection of user data", "AI speed", "AI complexity", "Model size"], "answer": "Protection of user data"},
+        {"question": "Which mitigates discrimination in AI?", "options": ["Fairness-aware algorithms", "Random models", "Overfitting", "Unsupervised clustering"], "answer": "Fairness-aware algorithms"},
+        {"question": "What is Responsible AI design?", "options": ["Building ethical AI", "Building fast AI", "Building large AI", "Building complex AI"], "answer": "Building ethical AI"},
+        {"question": "Which promotes trust in AI?", "options": ["Transparency & fairness", "Complexity", "Hidden logic", "Speed"], "answer": "Transparency & fairness"},
+        {"question": "What is inclusive AI?", "options": ["AI that serves all users fairly", "AI for one group only", "AI that excludes people", "AI that predicts incorrectly"], "answer": "AI that serves all users fairly"},
+    ]
+}
 
-    quiz = all_quizzes[selected_topic]
+# Step 3: Select Topic
+selected_topic = st.selectbox("Select AI Topic", list(topics.keys()))
+quiz = topics[selected_topic]
 
-    # ------------------------
-    # Step 3: Take user answers
-    # ------------------------
-    user_score = 0
-    user_responses = []
-    for idx, q in enumerate(quiz):
-        st.markdown(f"**Q{idx+1}: {q['question']}**")
-        user_answer = st.radio("Choose an answer:", q["options"], key=f"{selected_topic}_q{idx}")
-        user_responses.append((q['question'], user_answer, q["answer"]))
-        if user_answer == q["answer"]:
-            user_score += 1
+# Step 4: Display Questions
+st.markdown("---")
+st.subheader(f"{selected_topic} Quiz")
+user_answers = []
+for i, q in enumerate(quiz):
+    user_answer = st.radio(f"{i+1}. {q['question']}", q['options'], key=f"q{i}")
+    user_answers.append(user_answer)
 
-    score_percent = int((user_score / len(quiz)) * 100)
+# Step 5: Submit & Scoring
+if st.button("Submit Quiz"):
+    user_score = sum([1 for i, q in enumerate(quiz) if user_answers[i] == q['answer']])
+    score_percent = round(user_score / len(quiz) * 100, 2)
     passing_score = 60
+    user_responses = [(q['question'], user_answers[i], q['answer']) for i, q in enumerate(quiz)]
+    
+    # Pass/Fail message
+    if user_score >= int(len(quiz) * 0.6):
+        st.success(f"🎉 Congratulations {name}! You passed the {selected_topic} quiz with {score_percent}%.")
+    else:
+        st.error(f"😔 Sorry {name}, you did not pass the {selected_topic} quiz. Your score is {score_percent}%.")
 
-    if st.button("Submit Quiz"):
-        passed = user_score >= int(len(quiz) * 0.6)
+    # ------------------------
+    # PDF Generation
+    # ------------------------
+    pdf_buffer = BytesIO()
+    c = canvas.Canvas(pdf_buffer, pagesize=letter)
+    width, height = letter
 
-        # ------------------------
-        # PDF generation
-        # ------------------------
-        from io import BytesIO
-        from reportlab.lib.pagesizes import letter
-        from reportlab.pdfgen import canvas
-        import datetime, random
+    # Background & borders
+    c.setFillColorRGB(1, 0.992, 0.925)
+    c.rect(0, 0, width, height, fill=1, stroke=0)
+    c.setStrokeColorRGB(0.4, 0.26, 0.13)
+    c.setLineWidth(5)
+    c.rect(20, 20, width-40, height-40)
+    c.setLineWidth(2)
+    c.rect(35, 35, width-70, height-70)
 
-        pdf_buffer = BytesIO()
-        c = canvas.Canvas(pdf_buffer, pagesize=letter)
-        width, height = letter
+    # Header
+    c.setFont("Times-Bold", 22)
+    c.setFillColorRGB(0.0, 0.2, 0.0)
+    c.drawCentredString(width/2, height - 70, "UmojaAI – Career Bridge Initiative")
+    c.setFont("Helvetica-Oblique", 11)
+    c.setFillColorRGB(0, 0, 0)
+    c.drawCentredString(width/2, height - 90, "An AI-powered career guidance and digital skills initiative")
 
-        # Certificate background
-        c.setFillColorRGB(1, 0.992, 0.925)
-        c.rect(0, 0, width, height, fill=1, stroke=0)
+    # Watermark
+    c.saveState()
+    c.setFont("Helvetica-Bold", 50)
+    c.setFillColorRGB(0.9, 0.9, 0.9)
+    c.translate(width/2, height/2)
+    c.rotate(30)
+    c.drawCentredString(0, 0, "UmojaAI – Career Bridge Initiative")
+    c.restoreState()
 
-        # Borders
-        c.setStrokeColorRGB(0.4, 0.26, 0.13)
-        c.setLineWidth(5)
-        c.rect(20, 20, width-40, height-40)
-        c.setLineWidth(2)
-        c.rect(35, 35, width-70, height-70)
-
-        # Header
-        c.setFont("Times-Bold", 22)
+    if user_score >= int(len(quiz) * 0.6):
+        # Certificate content
+        c.setFont("Times-Bold", 34)
         c.setFillColorRGB(0.0, 0.2, 0.0)
-        c.drawCentredString(width/2, height - 70, "UmojaAI – Career Bridge Initiative")
-        c.setFont("Helvetica-Oblique", 11)
+        c.drawCentredString(width/2, height - 150, "Certificate of Achievement")
+        c.setFont("Helvetica", 16)
         c.setFillColorRGB(0, 0, 0)
-        c.drawCentredString(width/2, height - 90,
-                            "An AI-powered career guidance and digital skills initiative")
+        c.drawCentredString(width/2, height - 200, "This certificate is proudly awarded to")
+        c.setFont("Times-Bold", 26)
+        c.drawCentredString(width/2, height - 250, name)
+        c.setFont("Helvetica", 16)
+        c.drawCentredString(width/2, height - 300, f"For successfully demonstrating knowledge in {selected_topic}")
+        c.drawCentredString(width/2, height - 330, f"Score: {score_percent}% ({user_score}/{len(quiz)})")
+        c.drawCentredString(width/2, height - 360, f"Date: {datetime.date.today().strftime('%B %d, %Y')}")
+        c.drawCentredString(width/2, height - 380, "Issued in South Africa")
+        cert_id = f"UBC-{datetime.date.today().strftime('%Y%m%d')}-{random.randint(1000,9999)}"
+        c.setFont("Helvetica-Oblique", 10)
+        c.drawRightString(width - 40, 40, f"Certificate ID: {cert_id}")
 
-        # Watermark
-        c.saveState()
-        c.setFont("Helvetica-Bold", 50)
-        c.setFillColorRGB(0.9, 0.9, 0.9)
-        c.translate(width/2, height/2)
-        c.rotate(30)
-        c.drawCentredString(0, 0, "UmojaAI – Career Bridge Initiative")
-        c.restoreState()
+        # Signature bottom-left
+        c.setFont("Helvetica-Oblique", 14)
+        c.setFillColorRGB(0.0, 0.2, 0.0)
+        c.drawString(40, 35, "LM Ndlazi")
+        c.setFont("Helvetica", 9)
+        c.setFillColorRGB(0, 0, 0)
+        c.drawString(40, 20, "Programme Lead, UmojaAI – Career Bridge Initiative")
+    else:
+        # Quiz results content
+        c.setFont("Helvetica-Bold", 20)
+        c.drawCentredString(width/2, height - 100, f"{selected_topic} Quiz Results")
+        c.setFont("Helvetica", 14)
+        c.drawString(50, height - 150, f"Name: {name}")
+        c.drawString(50, height - 170, f"Email: {email}")
+        c.drawString(50, height - 200, f"Score: {score_percent}% ({user_score}/{len(quiz)})")
+        c.drawString(50, height - 230, f"Passing Score: {passing_score}%")
+        c.drawString(50, height - 260, "Detailed Results:")
+        y_pos = height - 290
+        for q_text, ua, ca in user_responses:
+            c.drawString(60, y_pos, f"Q: {q_text}")
+            y_pos -= 20
+            c.drawString(70, y_pos, f"Your Answer: {ua}")
+            y_pos -= 20
+            c.drawString(70, y_pos, f"Correct Answer: {ca}")
+            y_pos -= 30
 
-        if passed:
-            # Certificate content
-            c.setFont("Times-Bold", 34)
-            c.setFillColorRGB(0.0, 0.2, 0.0)
-            c.drawCentredString(width/2, height - 150, "Certificate of Achievement")
-            c.setFont("Helvetica", 16)
-            c.setFillColorRGB(0, 0, 0)
-            c.drawCentredString(width/2, height - 200, "This certificate is proudly awarded to")
-            c.setFont("Times-Bold", 26)
-            c.drawCentredString(width/2, height - 250, name)
-            c.setFont("Helvetica", 16)
-            c.drawCentredString(width/2, height - 300,
-                                f"For successfully demonstrating knowledge in {selected_topic}")
-            c.drawCentredString(width/2, height - 330, f"Score: {score_percent}% ({user_score}/{len(quiz)})")
-            c.drawCentredString(width/2, height - 360,
-                                f"Date: {datetime.date.today().strftime('%B %d, %Y')}")
-            c.drawCentredString(width/2, height - 380, "Issued in South Africa")
-            cert_id = f"UBC-{datetime.date.today().strftime('%Y%m%d')}-{random.randint(1000,9999)}"
-            c.setFont("Helvetica-Oblique", 10)
-            c.drawRightString(width - 40, 40, f"Certificate ID: {cert_id}")
+    c.save()
+    pdf_buffer.seek(0)
 
-            # Signature at bottom-left
-            c.setFont("Helvetica-Oblique", 18)
-            c.setFillColorRGB(0.0, 0.2, 0.0)
-            c.drawString(50, 40, "LM Ndlazi")
-            c.setFont("Helvetica", 10)
-            c.setFillColorRGB(0, 0, 0)
-            c.drawString(50, 25, "Programme Lead, UmojaAI – Career Bridge Initiative")
-
-        else:
-            # Quiz results content
-            c.setFont("Helvetica-Bold", 20)
-            c.drawCentredString(width/2, height - 100, f"{selected_topic} Quiz Results")
-            c.setFont("Helvetica", 14)
-            c.drawString(50, height - 150, f"Name: {name}")
-            c.drawString(50, height - 170, f"Email: {email}")
-            c.drawString(50, height - 200, f"Score: {score_percent}% ({user_score}/{len(quiz)})")
-            c.drawString(50, height - 230, f"Passing Score: {passing_score}%")
-            c.drawString(50, height - 260, "Detailed Results:")
-            y_pos = height - 290
-            for q_text, ua, ca in user_responses:
-                c.drawString(60, y_pos, f"Q: {q_text}")
-                y_pos -= 20
-                c.drawString(70, y_pos, f"Your Answer: {ua}")
-                y_pos -= 20
-                c.drawString(70, y_pos, f"Correct Answer: {ca}")
-                y_pos -= 30
-
-        c.save()
-        pdf_buffer.seek(0)
-
-        # Download button
-        if passed:
-            st.download_button(
-                label="📥 Download Certificate",
-                data=pdf_buffer,
-                file_name=f"{name}_certificate.pdf",
-                mime="application/pdf"
-            )
-        else:
-            st.download_button(
-                label="📥 Download Results",
-                data=pdf_buffer,
-                file_name=f"{name}_quiz_results.pdf",
-                mime="application/pdf"
-            )
-
+    # Download button
+    if user_score >= int(len(quiz) * 0.6):
+        st.download_button(
+            label="📥 Download Certificate",
+            data=pdf_buffer,
+            file_name=f"{name}_certificate.pdf",
+            mime="application/pdf"
+        )
+    else:
+        st.download_button(
+            label="📥 Download Results",
+            data=pdf_buffer,
+            file_name=f"{name}_quiz_results.pdf",
+            mime="application/pdf"
+        )
 
 # ------------------------
 # 🌍 Story
@@ -687,6 +677,7 @@ with tabs[6]:
     
    
     
+
 
 
 
