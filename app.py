@@ -559,36 +559,38 @@ with tabs[4]:  # Tab 4 for Quiz
         c.rect(20, 20, width-40, height-40)
         c.setLineWidth(2)
         c.rect(35, 35, width-70, height-70)
-
         if passed:
-            # Certificate content
-            c.setFont("Times-Bold", 34)
-            c.setFillColorRGB(0.0, 0.2, 0.0)
-            c.drawCentredString(width/2, height - 150, "Certificate of Achievement")
-            c.setFont("Helvetica", 16)
-            c.setFillColorRGB(0, 0, 0)
-            c.drawCentredString(width/2, height - 200, "This certificate is proudly awarded to")
-            c.setFont("Times-Bold", 26)
-            c.drawCentredString(width/2, height - 250, name)
-            c.setFont("Helvetica", 16)
-            c.drawCentredString(width/2, height - 300,
-                                f"For successfully demonstrating knowledge in {selected_topic}")
-            c.drawCentredString(width/2, height - 330, f"Score: {score_percent}% ({user_score}/{len(quiz)})")
-            c.drawCentredString(width/2, height - 360,
-                                f"Date: {datetime.date.today().strftime('%B %d, %Y')}")
-            c.drawCentredString(width/2, height - 380, "Issued in South Africa")
+    # Certificate content
+    c.setFont("Times-Bold", 34)
+    c.setFillColorRGB(0.0, 0.2, 0.0)
+    c.drawCentredString(width/2, height - 150, "Certificate of Achievement")
+    c.setFont("Helvetica", 16)
+    c.setFillColorRGB(0, 0, 0)
+    c.drawCentredString(width/2, height - 200, "This certificate is proudly awarded to")
+    c.setFont("Times-Bold", 26)
+    c.drawCentredString(width/2, height - 250, name)
+    c.setFont("Helvetica", 16)
+    c.drawCentredString(width/2, height - 300,
+                        f"For successfully demonstrating knowledge in {selected_topic}")
+    c.drawCentredString(width/2, height - 330, f"Score: {score_percent}% ({user_score}/{len(quiz)})")
+    c.drawCentredString(width/2, height - 360,
+                        f"Date: {datetime.date.today().strftime('%B %d, %Y')}")
+    c.drawCentredString(width/2, height - 380, "Issued in South Africa")
+    
+   # Certificate ID
             cert_id = f"UBC-{datetime.date.today().strftime('%Y%m%d')}-{random.randint(1000,9999)}"
             c.setFont("Helvetica-Oblique", 10)
             c.drawRightString(width - 40, 40, f"Certificate ID: {cert_id}")
+
             # Signature line
-c.line(width/2 - 100, height - 450, width/2 + 100, height - 450)  # line
-c.setFont("Helvetica-Bold", 12)
-c.drawCentredString(width/2, height - 465, "LM Ndlazi")  # Your signature name
-c.setFont("Helvetica", 10)
-c.drawCentredString(width/2, height - 480, "Programme Lead, UmojaAI – Career Bridge Initiative")
+            c.line(width/2 - 100, height - 450, width/2 + 100, height - 450)
+            c.setFont("Helvetica-Bold", 12)
+            c.drawCentredString(width/2, height - 465, "LM Ndlazi")
+            c.setFont("Helvetica", 10)
+            c.drawCentredString(width/2, height - 480, "Programme Lead, UmojaAI – Career Bridge Initiative")
 
         else:
-            # Quiz results content
+            # Quiz results
             c.setFont("Helvetica-Bold", 20)
             c.drawCentredString(width/2, height - 100, f"{selected_topic} Quiz Results")
             c.setFont("Helvetica", 14)
@@ -608,6 +610,7 @@ c.drawCentredString(width/2, height - 480, "Programme Lead, UmojaAI – Career B
 
         c.save()
         pdf_buffer.seek(0)
+
 
         # Download PDF
         if passed:
