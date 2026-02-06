@@ -513,12 +513,9 @@ with tabs[4]:  # Tab 4 for Quiz
     c.setFillColorRGB(1, 0.992, 0.925)  # cream-white
     c.rect(0, 0, width, height, fill=1, stroke=0)
 
-    # Outer border - brown
-    c.setStrokeColorRGB(0.4, 0.26, 0.13)
+    c.setStrokeColorRGB(0.4, 0.26, 0.13)  # brown
     c.setLineWidth(5)
     c.rect(20, 20, width-40, height-40)
-
-    # Inner border - brown thinner
     c.setLineWidth(2)
     c.rect(35, 35, width-70, height-70)
 
@@ -531,11 +528,8 @@ with tabs[4]:  # Tab 4 for Quiz
 
     c.setFont("Helvetica-Oblique", 11)
     c.setFillColorRGB(0, 0, 0)
-    c.drawCentredString(
-        width/2,
-        height - 90,
-        "An AI-powered career guidance and digital skills initiative"
-    )
+    c.drawCentredString(width/2, height - 90,
+                        "An AI-powered career guidance and digital skills initiative")
 
     # -------------------------
     # Watermark
@@ -570,13 +564,11 @@ with tabs[4]:  # Tab 4 for Quiz
         # Achievement Description
         # -------------------------
         c.setFont("Helvetica", 16)
-        c.drawCentredString(
-            width/2,
-            height - 300,
-            "For successfully demonstrating foundational knowledge in Artificial Intelligence"
-        )
+        c.drawCentredString(width/2, height - 300,
+                            "For successfully demonstrating foundational knowledge in Artificial Intelligence")
         c.drawCentredString(width/2, height - 330, f"Score: {user_score}/{len(quiz)}")
-        c.drawCentredString(width/2, height - 360, f"Date: {datetime.date.today().strftime('%B %d, %Y')}")
+        c.drawCentredString(width/2, height - 360,
+                            f"Date: {datetime.date.today().strftime('%B %d, %Y')}")
         c.drawCentredString(width/2, height - 380, "Issued in South Africa")
 
         # -------------------------
@@ -620,6 +612,7 @@ with tabs[4]:  # Tab 4 for Quiz
 
     c.save()
     pdf_buffer.seek(0)
+
 
         # Step 5: Download button
         if passed:
@@ -686,6 +679,7 @@ with tabs[6]:
     
    
     
+
 
 
 
