@@ -440,7 +440,6 @@ with tabs[3]:
 # 📚 AI Knowledge Quiz App
 # ------------------------
 st.set_page_config(page_title="AI Knowledge Quiz", layout="wide")
-
 st.title("📚 AI Knowledge Quiz")
 
 # Step 1: User details
@@ -527,131 +526,126 @@ if st.button("Submit Quiz"):
     score_percent = round(user_score / len(quiz) * 100, 2)
     passing_score = 60
     user_responses = [(q['question'], user_answers[i], q['answer']) for i, q in enumerate(quiz)]
-    
+
     # Pass/Fail message
-    if user_score >= int(len(quiz) * 0.6):
+    passed = user_score >= passing_score
+    if passed:
         st.success(f"🎉 Congratulations {name}! You passed the {selected_topic} quiz with {score_percent}%.")
     else:
         st.error(f"😔 Sorry {name}, you did not pass the {selected_topic} quiz. Your score is {score_percent}%.")
 
-   # ------------------------
-# PDF Generation
-# ------------------------
-pdf_buffer = BytesIO()
-c = canvas.Canvas(pdf_buffer, pagesize=letter)
-width, height = letter
-
-# Background & borders
-c.setFillColorRGB(1, 0.992, 0.925)
-c.rect(0, 0, width, height, fill=1, stroke=0)
-c.setStrokeColorRGB(0.4, 0.26, 0.13)
-c.setLineWidth(5)
-c.rect(20, 20, width-40, height-40)
-c.setLineWidth(2)
-c.rect(35, 35, width-70, height-70)
-
-# Header
-c.setFont("Times-Bold", 22)
-c.setFillColorRGB(0.0, 0.2, 0.0)
-c.drawCentredString(width/2, height - 70, "UmojaAI – Career Bridge Initiative")
-c.setFont("Helvetica-Oblique", 11)
-c.setFillColorRGB(0, 0, 0)
-c.drawCentredString(width/2, height - 90, "An AI-powered career guidance and digital skills initiative")
-
-# Watermark
-c.saveState()
-c.setFont("Helvetica-Bold", 50)
-c.setFillColorRGB(0.9, 0.9, 0.9)
-c.translate(width/2, height/2)
-c.rotate(30)
-c.drawCentredString(0, 0, "UmojaAI – Career Bridge")
-c.restoreState()
-
-if user_score >= int(len(quiz) * 0.6):
     # ------------------------
-    # Certificate content
+    # PDF Generation
     # ------------------------
-    c.setFont("Times-Bold", 34)
+    pdf_buffer = BytesIO()
+    c = canvas.Canvas(pdf_buffer, pagesize=letter)
+    width, height = letter
+
+    # Background & borders
+    c.setFillColorRGB(1, 0.992, 0.925)
+    c.rect(0, 0, width, height, fill=1, stroke=0)
+    c.setStrokeColorRGB(0.4, 0.26, 0.13)
+    c.setLineWidth(5)
+    c.rect(20, 20, width-40, height-40)
+    c.setLineWidth(2)
+    c.rect(35, 35, width-70, height-70)
+
+    # Header
+    c.setFont("Times-Bold", 22)
     c.setFillColorRGB(0.0, 0.2, 0.0)
-    c.drawCentredString(width/2, height - 150, "Certificate of Achievement")
-    c.setFont("Helvetica", 16)
+    c.drawCentredString(width/2, height - 70, "UmojaAI – Career Bridge Initiative")
+    c.setFont("Helvetica-Oblique", 11)
     c.setFillColorRGB(0, 0, 0)
-    c.drawCentredString(width/2, height - 200, "This certificate is proudly awarded to")
-    c.setFont("Times-Bold", 26)
-    c.drawCentredString(width/2, height - 250, name)
-    c.setFont("Helvetica", 16)
-    c.drawCentredString(width/2, height - 300, f"For successfully demonstrating knowledge in {selected_topic}")
-    c.drawCentredString(width/2, height - 330, f"Score: {score_percent}% ({user_score}/{len(quiz)})")
-    c.drawCentredString(width/2, height - 360, f"Date: {datetime.date.today().strftime('%B %d, %Y')}")
-    c.drawCentredString(width/2, height - 380, "Issued in South Africa")
+    c.drawCentredString(width/2, height - 90, "An AI-powered career guidance and digital skills initiative")
 
-    # Certificate ID
-    cert_id = f"UBC-{datetime.date.today().strftime('%Y%m%d')}-{random.randint(1000,9999)}"
-    c.setFont("Helvetica-Oblique", 10)
-    c.drawRightString(width - 40, 40, f"Certificate ID: {cert_id}")
+    # Watermark
+    c.saveState()
+    c.setFont("Helvetica-Bold", 50)
+    c.setFillColorRGB(0.9, 0.9, 0.9)
+    c.translate(width/2, height/2)
+    c.rotate(30)
+    c.drawCentredString(0, 0, "UmojaAI – Career Bridge")
+    c.restoreState()
 
-    # -------------------------
-    # Signature (Aligned like Certificate ID)
-    # -------------------------
-    sig_x = 60
-    sig_y = 55  # visually aligned with Certificate ID
+    if passed:
+        # Certificate content
+        c.setFont("Times-Bold", 34)
+        c.setFillColorRGB(0.0, 0.2, 0.0)
+        c.drawCentredString(width/2, height - 150, "Certificate of Achievement")
+        c.setFont("Helvetica", 16)
+        c.setFillColorRGB(0, 0, 0)
+        c.drawCentredString(width/2, height - 200, "This certificate is proudly awarded to")
+        c.setFont("Times-Bold", 26)
+        c.drawCentredString(width/2, height - 250, name)
+        c.setFont("Helvetica", 16)
+        c.drawCentredString(width/2, height - 300, f"For successfully demonstrating knowledge in {selected_topic}")
+        c.drawCentredString(width/2, height - 330, f"Score: {score_percent}% ({user_score}/{len(quiz)})")
+        c.drawCentredString(width/2, height - 360, f"Date: {datetime.date.today().strftime('%B %d, %Y')}")
+        c.drawCentredString(width/2, height - 380, "Issued in South Africa")
+        cert_id = f"UBC-{datetime.date.today().strftime('%Y%m%d')}-{random.randint(1000,9999)}"
+        c.setFont("Helvetica-Oblique", 10)
+        c.drawRightString(width - 40, 40, f"Certificate ID: {cert_id}")
 
-    # Signature line
-    c.setStrokeColorRGB(0.4, 0.26, 0.13)  # brown
-    c.setLineWidth(1.2)
-    c.line(sig_x, sig_y, sig_x + 160, sig_y)
+        # -------------------------
+        # Signature (Aligned like Certificate ID)
+        # -------------------------
+        sig_x = 60
+        sig_y = 55
 
-    # Signature name (handwritten style)
-    c.setFont("Times-Italic", 12)
-    c.setFillColorRGB(0.0, 0.2, 0.0)  # dark green
-    c.drawString(sig_x + 10, sig_y + 8, "LM Ndlazi")
+        # Signature line
+        c.setStrokeColorRGB(0.4, 0.26, 0.13)
+        c.setLineWidth(1.2)
+        c.line(sig_x, sig_y, sig_x + 160, sig_y)
 
-    # Signature title
-    c.setFont("Helvetica-Oblique", 9)
-    c.setFillColorRGB(0, 0, 0)
-    c.drawString(sig_x, sig_y - 14, "Programme Lead · UmojaAI – Career Bridge Initiative")
+        # Signature name (handwritten style)
+        c.setFont("Times-Italic", 12)
+        c.setFillColorRGB(0.0, 0.2, 0.0)
+        c.drawString(sig_x + 10, sig_y + 8, "LM Ndlazi")
 
-else:
-    # ------------------------
-    # Quiz results content
-    # ------------------------
-    c.setFont("Helvetica-Bold", 20)
-    c.drawCentredString(width/2, height - 100, f"{selected_topic} Quiz Results")
-    c.setFont("Helvetica", 14)
-    c.drawString(50, height - 150, f"Name: {name}")
-    c.drawString(50, height - 170, f"Email: {email}")
-    c.drawString(50, height - 200, f"Score: {score_percent}% ({user_score}/{len(quiz)})")
-    c.drawString(50, height - 230, f"Passing Score: {passing_score}%")
-    c.drawString(50, height - 260, "Detailed Results:")
+        # Signature title
+        c.setFont("Helvetica-Oblique", 9)
+        c.setFillColorRGB(0, 0, 0)
+        c.drawString(sig_x, sig_y - 14, "Programme Lead · UmojaAI – Career Bridge Initiative")
 
-    y_pos = height - 290
-    for q_text, ua, ca in user_responses:
-        c.drawString(60, y_pos, f"Q: {q_text}")
-        y_pos -= 20
-        c.drawString(70, y_pos, f"Your Answer: {ua}")
-        y_pos -= 20
-        c.drawString(70, y_pos, f"Correct Answer: {ca}")
-        y_pos -= 30
+    else:
+        # Quiz results content
+        c.setFont("Helvetica-Bold", 20)
+        c.drawCentredString(width/2, height - 100, f"{selected_topic} Quiz Results")
+        c.setFont("Helvetica", 14)
+        c.drawString(50, height - 150, f"Name: {name}")
+        c.drawString(50, height - 170, f"Email: {email}")
+        c.drawString(50, height - 200, f"Score: {score_percent}% ({user_score}/{len(quiz)})")
+        c.drawString(50, height - 230, f"Passing Score: {passing_score}%")
+        c.drawString(50, height - 260, "Detailed Results:")
 
-# Save PDF
-c.save()
-pdf_buffer.seek(0)
+        y_pos = height - 290
+        for q_text, ua, ca in user_responses:
+            c.drawString(60, y_pos, f"Q: {q_text}")
+            y_pos -= 20
+            c.drawString(70, y_pos, f"Your Answer: {ua}")
+            y_pos -= 20
+            c.drawString(70, y_pos, f"Correct Answer: {ca}")
+            y_pos -= 30
 
-# Download button
-if user_score >= int(len(quiz) * 0.6):
-    st.download_button(
-        label="📥 Download Certificate",
-        data=pdf_buffer,
-        file_name=f"{name}_certificate.pdf",
-        mime="application/pdf"
-    )
-else:
-    st.download_button(
-        label="📥 Download Results",
-        data=pdf_buffer,
-        file_name=f"{name}_quiz_results.pdf",
-        mime="application/pdf"
-    )
+    c.save()
+    pdf_buffer.seek(0)
+
+    # Download button
+    if passed:
+        st.download_button(
+            label="📥 Download Certificate",
+            data=pdf_buffer,
+            file_name=f"{name}_certificate.pdf",
+            mime="application/pdf"
+        )
+    else:
+        st.download_button(
+            label="📥 Download Results",
+            data=pdf_buffer,
+            file_name=f"{name}_quiz_results.pdf",
+            mime="application/pdf"
+        )
+
 
 
 
@@ -704,6 +698,7 @@ with tabs[6]:
     
    
     
+
 
 
 
