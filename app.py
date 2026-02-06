@@ -534,63 +534,67 @@ if st.button("Submit Quiz"):
     else:
         st.error(f"😔 Sorry {name}, you did not pass the {selected_topic} quiz. Your score is {score_percent}%.")
 
-    # ------------------------
-    # PDF Generation
-    # ------------------------
-    pdf_buffer = BytesIO()
-    c = canvas.Canvas(pdf_buffer, pagesize=letter)
-    width, height = letter
+   # ------------------------
+# PDF Generation
+# ------------------------
+pdf_buffer = BytesIO()
+c = canvas.Canvas(pdf_buffer, pagesize=letter)
+width, height = letter
 
-    # Background & borders
-    c.setFillColorRGB(1, 0.992, 0.925)
-    c.rect(0, 0, width, height, fill=1, stroke=0)
-    c.setStrokeColorRGB(0.4, 0.26, 0.13)
-    c.setLineWidth(5)
-    c.rect(20, 20, width-40, height-40)
-    c.setLineWidth(2)
-    c.rect(35, 35, width-70, height-70)
+# Background & borders
+c.setFillColorRGB(1, 0.992, 0.925)
+c.rect(0, 0, width, height, fill=1, stroke=0)
+c.setStrokeColorRGB(0.4, 0.26, 0.13)
+c.setLineWidth(5)
+c.rect(20, 20, width-40, height-40)
+c.setLineWidth(2)
+c.rect(35, 35, width-70, height-70)
 
-    # Header
-    c.setFont("Times-Bold", 22)
+# Header
+c.setFont("Times-Bold", 22)
+c.setFillColorRGB(0.0, 0.2, 0.0)
+c.drawCentredString(width/2, height - 70, "UmojaAI – Career Bridge Initiative")
+c.setFont("Helvetica-Oblique", 11)
+c.setFillColorRGB(0, 0, 0)
+c.drawCentredString(width/2, height - 90, "An AI-powered career guidance and digital skills initiative")
+
+# Watermark
+c.saveState()
+c.setFont("Helvetica-Bold", 50)
+c.setFillColorRGB(0.9, 0.9, 0.9)
+c.translate(width/2, height/2)
+c.rotate(30)
+c.drawCentredString(0, 0, "UmojaAI – Career Bridge")
+c.restoreState()
+
+if user_score >= int(len(quiz) * 0.6):
+    # ------------------------
+    # Certificate content
+    # ------------------------
+    c.setFont("Times-Bold", 34)
     c.setFillColorRGB(0.0, 0.2, 0.0)
-    c.drawCentredString(width/2, height - 70, "UmojaAI – Career Bridge Initiative")
-    c.setFont("Helvetica-Oblique", 11)
+    c.drawCentredString(width/2, height - 150, "Certificate of Achievement")
+    c.setFont("Helvetica", 16)
     c.setFillColorRGB(0, 0, 0)
-    c.drawCentredString(width/2, height - 90, "An AI-powered career guidance and digital skills initiative")
+    c.drawCentredString(width/2, height - 200, "This certificate is proudly awarded to")
+    c.setFont("Times-Bold", 26)
+    c.drawCentredString(width/2, height - 250, name)
+    c.setFont("Helvetica", 16)
+    c.drawCentredString(width/2, height - 300, f"For successfully demonstrating knowledge in {selected_topic}")
+    c.drawCentredString(width/2, height - 330, f"Score: {score_percent}% ({user_score}/{len(quiz)})")
+    c.drawCentredString(width/2, height - 360, f"Date: {datetime.date.today().strftime('%B %d, %Y')}")
+    c.drawCentredString(width/2, height - 380, "Issued in South Africa")
 
-    # Watermark
-    c.saveState()
-    c.setFont("Helvetica-Bold", 50)
-    c.setFillColorRGB(0.9, 0.9, 0.9)
-    c.translate(width/2, height/2)
-    c.rotate(30)
-    c.drawCentredString(0, 0, "UmojaAI – Career Bridge ")
-    c.restoreState()
+    # Certificate ID
+    cert_id = f"UBC-{datetime.date.today().strftime('%Y%m%d')}-{random.randint(1000,9999)}"
+    c.setFont("Helvetica-Oblique", 10)
+    c.drawRightString(width - 40, 40, f"Certificate ID: {cert_id}")
 
-    if user_score >= int(len(quiz) * 0.6):
-        # Certificate content
-        c.setFont("Times-Bold", 34)
-        c.setFillColorRGB(0.0, 0.2, 0.0)
-        c.drawCentredString(width/2, height - 150, "Certificate of Achievement")
-        c.setFont("Helvetica", 16)
-        c.setFillColorRGB(0, 0, 0)
-        c.drawCentredString(width/2, height - 200, "This certificate is proudly awarded to")
-        c.setFont("Times-Bold", 26)
-        c.drawCentredString(width/2, height - 250, name)
-        c.setFont("Helvetica", 16)
-        c.drawCentredString(width/2, height - 300, f"For successfully demonstrating knowledge in {selected_topic}")
-        c.drawCentredString(width/2, height - 330, f"Score: {score_percent}% ({user_score}/{len(quiz)})")
-        c.drawCentredString(width/2, height - 360, f"Date: {datetime.date.today().strftime('%B %d, %Y')}")
-        c.drawCentredString(width/2, height - 380, "Issued in South Africa")
-        cert_id = f"UBC-{datetime.date.today().strftime('%Y%m%d')}-{random.randint(1000,9999)}"
-        c.setFont("Helvetica-Oblique", 10)
-        c.drawRightString(width - 40, 40, f"Certificate ID: {cert_id}")
-if passed:
     # -------------------------
     # Signature (Aligned like Certificate ID)
     # -------------------------
     sig_x = 60
-    sig_y = 55  # aligned visually with Certificate ID height
+    sig_y = 55  # visually aligned with Certificate ID
 
     # Signature line
     c.setStrokeColorRGB(0.4, 0.26, 0.13)  # brown
@@ -605,17 +609,14 @@ if passed:
     # Signature title
     c.setFont("Helvetica-Oblique", 9)
     c.setFillColorRGB(0, 0, 0)
-    c.drawString(
-        sig_x,
-        sig_y - 14,
-        "Programme Lead · UmojaAI – Career Bridge Initiative"
-    )
+    c.drawString(sig_x, sig_y - 14, "Programme Lead · UmojaAI – Career Bridge Initiative")
 
 else:
+    # ------------------------
     # Quiz results content
+    # ------------------------
     c.setFont("Helvetica-Bold", 20)
     c.drawCentredString(width/2, height - 100, f"{selected_topic} Quiz Results")
-
     c.setFont("Helvetica", 14)
     c.drawString(50, height - 150, f"Name: {name}")
     c.drawString(50, height - 170, f"Email: {email}")
@@ -632,6 +633,7 @@ else:
         c.drawString(70, y_pos, f"Correct Answer: {ca}")
         y_pos -= 30
 
+# Save PDF
 c.save()
 pdf_buffer.seek(0)
 
@@ -650,6 +652,7 @@ else:
         file_name=f"{name}_quiz_results.pdf",
         mime="application/pdf"
     )
+
 
 
 # ------------------------
@@ -701,6 +704,7 @@ with tabs[6]:
     
    
     
+
 
 
 
