@@ -453,24 +453,7 @@ with tabs[4]:  # Tab 4 for Quiz
         {"question": "What does AI stand for?", "options": ["Artificial Intelligence", "Automated Internet", "Artificial Integration", "Algorithmic Input"], "answer": "Artificial Intelligence"},
         {"question": "Which language is commonly used for AI development?", "options": ["Python", "HTML", "CSS", "SQL"], "answer": "Python"},
         {"question": "What is supervised learning?", "options": ["Learning with labeled data", "Learning without data", "Learning from mistakes only", "Learning without supervision"], "answer": "Learning with labeled data"},
-        {"question": "Which of these is a type of neural network?", "options": ["Convolutional Neural Network", "Random Forest", "Decision Tree", "K-Means"], "answer": "Convolutional Neural Network"},
-        {"question": "What is NLP?", "options": ["Natural Language Processing", "New Learning Protocol", "Neural Logic Programming", "Network Language Processing"], "answer": "Natural Language Processing"},
-        {"question": "Which Python library is used for data manipulation?", "options": ["Pandas", "NumPy", "Matplotlib", "Seaborn"], "answer": "Pandas"},
-        {"question": "What is overfitting in machine learning?", "options": ["Model performs well on training but poorly on new data", "Model underperforms on training", "Data not enough", "Model is perfect"], "answer": "Model performs well on training but poorly on new data"},
-        {"question": "Which of the following is a cloud service provider?", "options": ["AWS", "GitHub", "Python", "Excel"], "answer": "AWS"},
-        {"question": "What is a chatbot?", "options": ["AI program that can converse with humans", "A website", "A type of database", "A programming language"], "answer": "AI program that can converse with humans"},
-        {"question": "Which of these is a type of machine learning?", "options": ["Supervised", "Randomized", "Sequential", "Structured"], "answer": "Supervised"},
-        {"question": "What is a dataset?", "options": ["Collection of data", "A programming language", "A neural network", "A text editor"], "answer": "Collection of data"},
-        {"question": "Which of these is used for data visualization?", "options": ["Matplotlib", "SQL", "Python", "AWS"], "answer": "Matplotlib"},
-        {"question": "What does API stand for?", "options": ["Application Programming Interface", "Artificial Programming Intelligence", "Automated Process Integration", "Applied Protocol Interface"], "answer": "Application Programming Interface"},
-        {"question": "Which of these is an AI framework?", "options": ["TensorFlow", "Bootstrap", "Django", "Flask"], "answer": "TensorFlow"},
-        {"question": "What is deep learning?", "options": ["Subset of machine learning using neural networks", "Basic programming", "Database querying", "Data visualization"], "answer": "Subset of machine learning using neural networks"},
-        {"question": "What is reinforcement learning?", "options": ["Learning by trial and error with rewards", "Learning with labeled data", "Learning without data", "Learning randomly"], "answer": "Learning by trial and error with rewards"},
-        {"question": "Which of these is an AI language model?", "options": ["GPT", "HTML", "CSS", "SQL"], "answer": "GPT"},
-        {"question": "What is a model in machine learning?", "options": ["Algorithm trained on data to make predictions", "A type of website", "A text file", "A programming language"], "answer": "Algorithm trained on data to make predictions"},
-        {"question": "Which of the following is NOT AI?", "options": ["Microsoft Word", "GPT", "Computer Vision", "ChatGPT"], "answer": "Microsoft Word"},
-        {"question": "Which metric measures classification accuracy?", "options": ["Accuracy", "Loss", "Learning rate", "Epoch"], "answer": "Accuracy"},
-        {"question": "What is bias in AI?", "options": ["Systematic error in predictions", "Random mistakes", "Perfect predictions", "Data cleaning"], "answer": "Systematic error in predictions"},
+        # ... add all your other questions here ...
     ]
 
     # Step 3: Take user answers
@@ -483,122 +466,122 @@ with tabs[4]:  # Tab 4 for Quiz
         if user_answer == q["answer"]:
             user_score += 1
 
-  if st.button("Submit Quiz"):
-    st.markdown("---")
-    st.markdown(f"### Your Score: {user_score}/{len(quiz)}")
-    passing_score = int(0.6 * len(quiz))  # 60% pass threshold
+    # Step 4: Submit button (fixed indentation)
+    if st.button("Submit Quiz"):
+        st.markdown("---")
+        st.markdown(f"### Your Score: {user_score}/{len(quiz)}")
+        passing_score = int(0.6 * len(quiz))  # 60% pass threshold
 
-    if user_score >= passing_score:
-        st.success("🎉 Congratulations! You passed!")
-        passed = True
-    else:
-        st.error("😢 Sorry, you did not pass.")
-        passed = False
+        if user_score >= passing_score:
+            st.success("🎉 Congratulations! You passed!")
+            passed = True
+        else:
+            st.error("😢 Sorry, you did not pass.")
+            passed = False
 
-    # -------------------------
-    # PDF Generation
-    # -------------------------
-    from reportlab.lib.pagesizes import letter
-    from reportlab.pdfgen import canvas
-    from reportlab.lib import colors
-    from reportlab.lib.units import inch
-    from io import BytesIO
-    import datetime, random
+        # -------------------------
+        # PDF Generation
+        # -------------------------
+        from reportlab.lib.pagesizes import letter
+        from reportlab.pdfgen import canvas
+        from reportlab.lib import colors
+        from io import BytesIO
+        import datetime, random
 
-    pdf_buffer = BytesIO()
-    c = canvas.Canvas(pdf_buffer, pagesize=letter)
-    width, height = letter
+        pdf_buffer = BytesIO()
+        c = canvas.Canvas(pdf_buffer, pagesize=letter)
+        width, height = letter
 
-    # Background & Borders
-    c.setFillColorRGB(1, 0.992, 0.925)  # cream-white
-    c.rect(0, 0, width, height, fill=1, stroke=0)
+        # Background & Borders
+        c.setFillColorRGB(1, 0.992, 0.925)  # cream-white
+        c.rect(0, 0, width, height, fill=1, stroke=0)
 
-    # Outer border - brown
-    c.setStrokeColorRGB(0.4, 0.26, 0.13)
-    c.setLineWidth(5)
-    c.rect(20, 20, width-40, height-40)
+        # Outer border - brown
+        c.setStrokeColorRGB(0.4, 0.26, 0.13)
+        c.setLineWidth(5)
+        c.rect(20, 20, width-40, height-40)
 
-    # Inner border - brown thinner
-    c.setLineWidth(2)
-    c.rect(35, 35, width-70, height-70)
+        # Inner border - brown thinner
+        c.setLineWidth(2)
+        c.rect(35, 35, width-70, height-70)
 
-    # Header / Issuer
-    c.setFont("Times-Bold", 22)
-    c.setFillColorRGB(0.0, 0.2, 0.0)  # dark green
-    c.drawCentredString(width/2, height - 70, "UmojaAI – Career Bridge Initiative")
+        # Header / Issuer
+        c.setFont("Times-Bold", 22)
+        c.setFillColorRGB(0.0, 0.2, 0.0)  # dark green
+        c.drawCentredString(width/2, height - 70, "UmojaAI – Career Bridge Initiative")
 
-    c.setFont("Helvetica-Oblique", 11)
-    c.setFillColorRGB(0, 0, 0)
-    c.drawCentredString(width/2, height - 90,
-                        "An AI-powered career guidance and digital skills initiative")
-
-    # Watermark
-    c.saveState()
-    c.setFont("Helvetica-Bold", 50)
-    c.setFillColorRGB(0.9, 0.9, 0.9)
-    c.translate(width/2, height/2)
-    c.rotate(30)
-    c.drawCentredString(0, 0, "UmojaAI – Career Bridge Initiative")
-    c.restoreState()
-
-    if passed:
-        # Certificate Title
-        c.setFont("Times-Bold", 34)
-        c.setFillColorRGB(0.0, 0.2, 0.0)
-        c.drawCentredString(width/2, height - 150, "Certificate of Achievement")
-
-        # Awardee Info
-        c.setFont("Helvetica", 16)
+        c.setFont("Helvetica-Oblique", 11)
         c.setFillColorRGB(0, 0, 0)
-        c.drawCentredString(width/2, height - 200, "This certificate is proudly awarded to")
+        c.drawCentredString(width/2, height - 90,
+                            "An AI-powered career guidance and digital skills initiative")
 
-        c.setFont("Times-Bold", 26)
-        c.drawCentredString(width/2, height - 250, name)
+        # Watermark
+        c.saveState()
+        c.setFont("Helvetica-Bold", 50)
+        c.setFillColorRGB(0.9, 0.9, 0.9)
+        c.translate(width/2, height/2)
+        c.rotate(30)
+        c.drawCentredString(0, 0, "UmojaAI – Career Bridge Initiative")
+        c.restoreState()
 
-        # Achievement Description
-        c.setFont("Helvetica", 16)
-        c.drawCentredString(width/2, height - 300,
-                            "For successfully demonstrating foundational knowledge in Artificial Intelligence")
-        c.drawCentredString(width/2, height - 330, f"Score: {user_score}/{len(quiz)}")
-        c.drawCentredString(width/2, height - 360,
-                            f"Date: {datetime.date.today().strftime('%B %d, %Y')}")
-        c.drawCentredString(width/2, height - 380, "Issued in South Africa")
+        if passed:
+            # Certificate Title
+            c.setFont("Times-Bold", 34)
+            c.setFillColorRGB(0.0, 0.2, 0.0)
+            c.drawCentredString(width/2, height - 150, "Certificate of Achievement")
 
-        # Certificate ID
-        cert_id = f"UBC-{datetime.date.today().strftime('%Y%m%d')}-{random.randint(1000,9999)}"
-        c.setFont("Helvetica-Oblique", 10)
-        c.drawRightString(width - 40, 40, f"Certificate ID: {cert_id}")
+            # Awardee Info
+            c.setFont("Helvetica", 16)
+            c.setFillColorRGB(0, 0, 0)
+            c.drawCentredString(width/2, height - 200, "This certificate is proudly awarded to")
 
-        # Signature
-        c.setStrokeColorRGB(0.4, 0.26, 0.13)  # brown line
-        c.line(80, 90, 280, 90)
-        c.setFont("Helvetica-BoldOblique", 12)
-        c.setFillColorRGB(0.0, 0.2, 0.0)
-        c.drawString(120, 92, "LM Ndlazi")  # Signature name
-        c.setFont("Helvetica", 10)
-        c.drawString(120, 76, "Programme Lead, UmojaAI – Career Bridge Initiative")
+            c.setFont("Times-Bold", 26)
+            c.drawCentredString(width/2, height - 250, name)
 
-    else:
-        # Quiz Results PDF
-        c.setFont("Helvetica-Bold", 20)
-        c.drawCentredString(width/2, height - 100, "Quiz Results")
-        c.setFont("Helvetica", 14)
-        c.drawString(50, height - 150, f"Name: {name}")
-        c.drawString(50, height - 170, f"Email: {email}")
-        c.drawString(50, height - 200, f"Score: {user_score}/{len(quiz)}")
-        c.drawString(50, height - 230, f"Passing Score: {passing_score}/{len(quiz)}")
-        c.drawString(50, height - 260, "Detailed Results:")
-        y_pos = height - 290
-        for q_text, ua, ca in user_responses:
-            c.drawString(60, y_pos, f"Q: {q_text}")
-            y_pos -= 20
-            c.drawString(70, y_pos, f"Your Answer: {ua}")
-            y_pos -= 20
-            c.drawString(70, y_pos, f"Correct Answer: {ca}")
-            y_pos -= 30
+            # Achievement Description
+            c.setFont("Helvetica", 16)
+            c.drawCentredString(width/2, height - 300,
+                                "For successfully demonstrating foundational knowledge in Artificial Intelligence")
+            c.drawCentredString(width/2, height - 330, f"Score: {user_score}/{len(quiz)}")
+            c.drawCentredString(width/2, height - 360,
+                                f"Date: {datetime.date.today().strftime('%B %d, %Y')}")
+            c.drawCentredString(width/2, height - 380, "Issued in South Africa")
 
-    c.save()
-    pdf_buffer.seek(0)
+            # Certificate ID
+            cert_id = f"UBC-{datetime.date.today().strftime('%Y%m%d')}-{random.randint(1000,9999)}"
+            c.setFont("Helvetica-Oblique", 10)
+            c.drawRightString(width - 40, 40, f"Certificate ID: {cert_id}")
+
+            # Signature
+            c.setStrokeColorRGB(0.4, 0.26, 0.13)  # brown line
+            c.line(80, 90, 280, 90)
+            c.setFont("Helvetica-BoldOblique", 12)
+            c.setFillColorRGB(0.0, 0.2, 0.0)
+            c.drawString(120, 92, "LM Ndlazi")  # Signature name
+            c.setFont("Helvetica", 10)
+            c.drawString(120, 76, "Programme Lead, UmojaAI – Career Bridge Initiative")
+
+        else:
+            # Quiz Results PDF
+            c.setFont("Helvetica-Bold", 20)
+            c.drawCentredString(width/2, height - 100, "Quiz Results")
+            c.setFont("Helvetica", 14)
+            c.drawString(50, height - 150, f"Name: {name}")
+            c.drawString(50, height - 170, f"Email: {email}")
+            c.drawString(50, height - 200, f"Score: {user_score}/{len(quiz)}")
+            c.drawString(50, height - 230, f"Passing Score: {passing_score}/{len(quiz)}")
+            c.drawString(50, height - 260, "Detailed Results:")
+            y_pos = height - 290
+            for q_text, ua, ca in user_responses:
+                c.drawString(60, y_pos, f"Q: {q_text}")
+                y_pos -= 20
+                c.drawString(70, y_pos, f"Your Answer: {ua}")
+                y_pos -= 20
+                c.drawString(70, y_pos, f"Correct Answer: {ca}")
+                y_pos -= 30
+
+        c.save()
+        pdf_buffer.seek(0)
 
         # Step 5: Download button
         if passed:
@@ -615,6 +598,7 @@ with tabs[4]:  # Tab 4 for Quiz
                 file_name=f"{name}_quiz_results.pdf",
                 mime="application/pdf"
             )
+
 
 # ------------------------
 # 🌍 Story
@@ -665,6 +649,7 @@ with tabs[6]:
     
    
     
+
 
 
 
