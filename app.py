@@ -434,9 +434,9 @@ with tabs[3]:
                     # ------------------------
                     # ------------------------
 # ------------------------
-# 📚 AI Knowledge Quiz with Topics
+# 📚 AI Knowledge Quiz
 # ------------------------
-with tabs[4]:
+with tabs[4]:  # Tab 4 for Quiz
     st.subheader("📚 AI Knowledge Quiz")
 
     # Step 1: User details
@@ -445,37 +445,75 @@ with tabs[4]:
     email = st.text_input("Email Address")
 
     st.markdown("---")
-    st.markdown("### Select Quiz Topic")
-    topics = ["AI Basics", "Machine Learning", "Natural Language Processing"]
-    selected_topic = st.selectbox("Choose a topic", topics)
+    st.markdown("### Select Topic")
+    topics = ["General AI", "Machine Learning", "Natural Language Processing"]
+    selected_topic = st.selectbox("Choose a topic:", topics)
 
-    st.markdown("---")
     st.markdown("### Quiz Instructions")
     st.write("Select the correct answer for each question. A score of 60% or higher is required to pass.")
 
-    # Step 2: Define quizzes per topic
-    quizzes = {
-        "AI Basics": [
+    # ------------------------
+    # Step 2: Questions per topic
+    # ------------------------
+    all_quizzes = {
+        "General AI": [
             {"question": "What does AI stand for?", "options": ["Artificial Intelligence", "Automated Internet", "Artificial Integration", "Algorithmic Input"], "answer": "Artificial Intelligence"},
-            {"question": "Which language is commonly used for AI development?", "options": ["Python", "HTML", "CSS", "SQL"], "answer": "Python"},
-            {"question": "What is supervised learning?", "options": ["Learning with labeled data", "Learning without data", "Learning from mistakes only", "Learning without supervision"], "answer": "Learning with labeled data"},
-            # ... add at least 15 questions ...
+            {"question": "Which language is most used for AI?", "options": ["Python", "HTML", "CSS", "SQL"], "answer": "Python"},
+            {"question": "Which of these is a type of AI?", "options": ["Narrow AI", "General AI", "Super AI", "All of the above"], "answer": "All of the above"},
+            {"question": "Who coined the term 'Artificial Intelligence'?", "options": ["Alan Turing", "John McCarthy", "Geoffrey Hinton", "Andrew Ng"], "answer": "John McCarthy"},
+            {"question": "Which AI can perform any intellectual task?", "options": ["Narrow AI", "General AI", "Machine Learning", "Deep Learning"], "answer": "General AI"},
+            {"question": "AI can be categorized into?", "options": ["Weak AI", "Strong AI", "Both", "None"], "answer": "Both"},
+            {"question": "Which AI application is voice recognition?", "options": ["Narrow AI", "General AI", "Strong AI", "Reinforcement AI"], "answer": "Narrow AI"},
+            {"question": "AI is related to?", "options": ["Algorithms", "Data", "Computing", "All of the above"], "answer": "All of the above"},
+            {"question": "Which AI is used in self-driving cars?", "options": ["Narrow AI", "General AI", "Machine Learning", "All of the above"], "answer": "All of the above"},
+            {"question": "AI is a field of?", "options": ["Computer Science", "Biology", "Chemistry", "Physics"], "answer": "Computer Science"},
+            {"question": "AI systems can learn from?", "options": ["Data", "Experience", "Both", "None"], "answer": "Both"},
+            {"question": "Which AI can surpass human intelligence?", "options": ["Narrow AI", "General AI", "Super AI", "Weak AI"], "answer": "Super AI"},
+            {"question": "AI uses which type of models?", "options": ["Mathematical", "Statistical", "Algorithmic", "All of the above"], "answer": "All of the above"},
+            {"question": "The Turing Test checks for?", "options": ["Machine intelligence", "Human intelligence", "Computer speed", "Data accuracy"], "answer": "Machine intelligence"},
+            {"question": "Which AI is best for specific tasks?", "options": ["Narrow AI", "General AI", "Super AI", "Weak AI"], "answer": "Narrow AI"},
         ],
         "Machine Learning": [
-            {"question": "What is overfitting?", "options": ["Model performs well on training but poorly on new data", "Model underperforms on training", "Data not enough", "Model is perfect"], "answer": "Model performs well on training but poorly on new data"},
-            {"question": "Which of these is a type of neural network?", "options": ["Convolutional Neural Network", "Random Forest", "Decision Tree", "K-Means"], "answer": "Convolutional Neural Network"},
-            # ... add at least 15 questions ...
+            {"question": "What is supervised learning?", "options": ["Learning with labeled data", "Learning without data", "Learning randomly", "All of the above"], "answer": "Learning with labeled data"},
+            {"question": "What is unsupervised learning?", "options": ["Learning with unlabeled data", "Learning with labels", "Reinforcement learning", "Deep learning"], "answer": "Learning with unlabeled data"},
+            {"question": "What is overfitting?", "options": ["Model performs well on training but poorly on new data", "Model is perfect", "Model underperforms everywhere", "None"], "answer": "Model performs well on training but poorly on new data"},
+            {"question": "Which algorithm is for regression?", "options": ["Linear Regression", "Decision Tree", "K-Means", "PCA"], "answer": "Linear Regression"},
+            {"question": "Which algorithm is unsupervised?", "options": ["K-Means", "Linear Regression", "Logistic Regression", "SVM"], "answer": "K-Means"},
+            {"question": "Which library is for ML in Python?", "options": ["scikit-learn", "Flask", "Django", "BeautifulSoup"], "answer": "scikit-learn"},
+            {"question": "Which is a type of neural network?", "options": ["Convolutional Neural Network", "Random Forest", "Decision Tree", "Linear Regression"], "answer": "Convolutional Neural Network"},
+            {"question": "What is reinforcement learning?", "options": ["Learning by trial and error", "Learning with labels", "Random learning", "All of the above"], "answer": "Learning by trial and error"},
+            {"question": "Feature scaling helps with?", "options": ["Faster convergence", "Better accuracy", "Both", "None"], "answer": "Both"},
+            {"question": "Overfitting can be reduced by?", "options": ["Regularization", "More data", "Dropout", "All of the above"], "answer": "All of the above"},
+            {"question": "What is cross-validation?", "options": ["Technique to evaluate model", "Model training", "Hyperparameter tuning", "None"], "answer": "Technique to evaluate model"},
+            {"question": "Which ML type uses rewards?", "options": ["Reinforcement Learning", "Supervised", "Unsupervised", "All"], "answer": "Reinforcement Learning"},
+            {"question": "Which is a loss function?", "options": ["Mean Squared Error", "Accuracy", "Precision", "Recall"], "answer": "Mean Squared Error"},
+            {"question": "Which is a classification algorithm?", "options": ["Logistic Regression", "Linear Regression", "PCA", "K-Means"], "answer": "Logistic Regression"},
+            {"question": "Which is used for dimensionality reduction?", "options": ["PCA", "SVM", "Decision Tree", "Random Forest"], "answer": "PCA"},
         ],
         "Natural Language Processing": [
-            {"question": "What does NLP stand for?", "options": ["Natural Language Processing", "New Learning Protocol", "Neural Logic Programming", "Network Language Processing"], "answer": "Natural Language Processing"},
-            {"question": "Which Python library is used for NLP?", "options": ["NLTK", "Pandas", "NumPy", "Matplotlib"], "answer": "NLTK"},
-            # ... add at least 15 questions ...
+            {"question": "What is NLP?", "options": ["Natural Language Processing", "New Learning Protocol", "Neural Logic Programming", "Network Language Processing"], "answer": "Natural Language Processing"},
+            {"question": "Tokenization means?", "options": ["Splitting text into words/tokens", "Combining sentences", "Translating text", "Encoding images"], "answer": "Splitting text into words/tokens"},
+            {"question": "Stemming removes?", "options": ["Word suffixes", "Numbers", "Punctuation", "Spaces"], "answer": "Word suffixes"},
+            {"question": "Lemmatization keeps?", "options": ["Root form of words", "Full sentence", "Tokens", "Stopwords"], "answer": "Root form of words"},
+            {"question": "What is a stopword?", "options": ["Common word removed from analysis", "Keyword", "Sentence", "Paragraph"], "answer": "Common word removed from analysis"},
+            {"question": "Which library is for NLP in Python?", "options": ["NLTK", "NumPy", "Pandas", "Matplotlib"], "answer": "NLTK"},
+            {"question": "Word embeddings represent?", "options": ["Words as vectors", "Numbers", "Strings", "Images"], "answer": "Words as vectors"},
+            {"question": "POS tagging is?", "options": ["Part-of-speech tagging", "Predictive modeling", "Clustering", "Tokenization"], "answer": "Part-of-speech tagging"},
+            {"question": "NER stands for?", "options": ["Named Entity Recognition", "Neural Encoding Regression", "Natural Evaluation Rate", "None"], "answer": "Named Entity Recognition"},
+            {"question": "Bag-of-words model is?", "options": ["Text representation", "Image model", "Audio model", "Database model"], "answer": "Text representation"},
+            {"question": "TF-IDF measures?", "options": ["Importance of a word in a document", "Word frequency only", "Sentence length", "Token count"], "answer": "Importance of a word in a document"},
+            {"question": "Language models predict?", "options": ["Next word in sequence", "Document length", "Sentence grammar", "Paragraph topic"], "answer": "Next word in sequence"},
+            {"question": "Which model is transformer-based?", "options": ["BERT", "Word2Vec", "GloVe", "TF-IDF"], "answer": "BERT"},
+            {"question": "Sentiment analysis detects?", "options": ["Emotion in text", "Language type", "Word count", "Topic"], "answer": "Emotion in text"},
+            {"question": "Which task is sequence labeling?", "options": ["NER", "Summarization", "Translation", "POS tagging"], "answer": "NER"},
         ]
     }
 
-    quiz = quizzes[selected_topic]
+    quiz = all_quizzes[selected_topic]
 
-    # Step 3: User answers
+    # ------------------------
+    # Step 3: Take user answers
+    # ------------------------
     user_score = 0
     user_responses = []
     for idx, q in enumerate(quiz):
@@ -485,32 +523,25 @@ with tabs[4]:
         if user_answer == q["answer"]:
             user_score += 1
 
-    # Step 4: Submit button
+    score_percent = int((user_score / len(quiz)) * 100)
+    passing_score = 60
+
     if st.button("Submit Quiz"):
-        st.markdown("---")
-        score_percent = int((user_score / len(quiz)) * 100)
-        st.markdown(f"### Your Score: {score_percent}% ({user_score}/{len(quiz)})")
-        passing_score = 60
-
-        passed = score_percent >= passing_score
-        if passed:
-            st.success("🎉 Congratulations! You passed!")
-        else:
-            st.error("😢 Sorry, you did not pass.")
+        passed = user_score >= int(len(quiz) * 0.6)
 
         # ------------------------
-        # PDF Generation
+        # PDF generation
         # ------------------------
+        from io import BytesIO
         from reportlab.lib.pagesizes import letter
         from reportlab.pdfgen import canvas
-        from io import BytesIO
         import datetime, random
 
         pdf_buffer = BytesIO()
         c = canvas.Canvas(pdf_buffer, pagesize=letter)
         width, height = letter
 
-        # Background
+        # Certificate background
         c.setFillColorRGB(1, 0.992, 0.925)
         c.rect(0, 0, width, height, fill=1, stroke=0)
 
@@ -521,8 +552,26 @@ with tabs[4]:
         c.setLineWidth(2)
         c.rect(35, 35, width-70, height-70)
 
+        # Header
+        c.setFont("Times-Bold", 22)
+        c.setFillColorRGB(0.0, 0.2, 0.0)
+        c.drawCentredString(width/2, height - 70, "UmojaAI – Career Bridge Initiative")
+        c.setFont("Helvetica-Oblique", 11)
+        c.setFillColorRGB(0, 0, 0)
+        c.drawCentredString(width/2, height - 90,
+                            "An AI-powered career guidance and digital skills initiative")
+
+        # Watermark
+        c.saveState()
+        c.setFont("Helvetica-Bold", 50)
+        c.setFillColorRGB(0.9, 0.9, 0.9)
+        c.translate(width/2, height/2)
+        c.rotate(30)
+        c.drawCentredString(0, 0, "UmojaAI – Career Bridge Initiative")
+        c.restoreState()
+
         if passed:
-            # Certificate
+            # Certificate content
             c.setFont("Times-Bold", 34)
             c.setFillColorRGB(0.0, 0.2, 0.0)
             c.drawCentredString(width/2, height - 150, "Certificate of Achievement")
@@ -538,21 +587,20 @@ with tabs[4]:
             c.drawCentredString(width/2, height - 360,
                                 f"Date: {datetime.date.today().strftime('%B %d, %Y')}")
             c.drawCentredString(width/2, height - 380, "Issued in South Africa")
-            
-            # Certificate ID
             cert_id = f"UBC-{datetime.date.today().strftime('%Y%m%d')}-{random.randint(1000,9999)}"
             c.setFont("Helvetica-Oblique", 10)
             c.drawRightString(width - 40, 40, f"Certificate ID: {cert_id}")
 
-            # Signature line
-            c.line(width/2 - 100, height - 450, width/2 + 100, height - 450)
-            c.setFont("Helvetica-Bold", 12)
-            c.drawCentredString(width/2, height - 465, "LM Ndlazi")
+            # Signature at bottom-left
+            c.setFont("Helvetica-Oblique", 18)
+            c.setFillColorRGB(0.0, 0.2, 0.0)
+            c.drawString(50, 40, "LM Ndlazi")
             c.setFont("Helvetica", 10)
-            c.drawCentredString(width/2, height - 480, "Programme Lead, UmojaAI – Career Bridge Initiative")
+            c.setFillColorRGB(0, 0, 0)
+            c.drawString(50, 25, "Programme Lead, UmojaAI – Career Bridge Initiative")
 
         else:
-            # Quiz results
+            # Quiz results content
             c.setFont("Helvetica-Bold", 20)
             c.drawCentredString(width/2, height - 100, f"{selected_topic} Quiz Results")
             c.setFont("Helvetica", 14)
@@ -639,6 +687,7 @@ with tabs[6]:
     
    
     
+
 
 
 
