@@ -614,7 +614,7 @@ with tabs[5]:
     col1, col2 = st.columns([1, 3])  # Adjust ratio as needed
 
     with col1:
-        st.image("images/Lindi.jpg", width=200, caption="Lindiwe Ndlazi")
+        st.image("images/liindii.jpg", width=200, caption="Lindiwe Ndlazi")
  # Replace with your image path
 
     with col2:
@@ -653,6 +653,7 @@ with tabs[6]:
     
    
     
+
 
 
 
