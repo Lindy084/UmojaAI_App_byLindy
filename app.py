@@ -585,14 +585,31 @@ if st.button("Submit Quiz"):
         cert_id = f"UBC-{datetime.date.today().strftime('%Y%m%d')}-{random.randint(1000,9999)}"
         c.setFont("Helvetica-Oblique", 10)
         c.drawRightString(width - 40, 40, f"Certificate ID: {cert_id}")
+  # -------------------------
+# Signature (Aligned like Certificate ID)
+# -------------------------
+sig_x = 60
+sig_y = 55  # aligned visually with Certificate ID height
 
-        # Signature bottom-left
-        c.setFont("Helvetica-Oblique", 14)
-        c.setFillColorRGB(0.0, 0.2, 0.0)
-        c.drawString(40, 35, "LM Ndlazi")
-        c.setFont("Helvetica", 9)
-        c.setFillColorRGB(0, 0, 0)
-        c.drawString(40, 20, "Programme Lead, UmojaAI – Career Bridge Initiative")
+# Signature line
+c.setStrokeColorRGB(0.4, 0.26, 0.13)  # brown
+c.setLineWidth(1.2)
+c.line(sig_x, sig_y, sig_x + 160, sig_y)
+
+# Signature name (handwritten style)
+c.setFont("Times-Italic", 12)
+c.setFillColorRGB(0.0, 0.2, 0.0)  # dark green
+c.drawString(sig_x + 10, sig_y + 8, "LM Ndlazi")
+
+# Signature title
+c.setFont("Helvetica-Oblique", 9)
+c.setFillColorRGB(0, 0, 0)
+c.drawString(
+    sig_x,
+    sig_y - 14,
+    "Programme Lead · UmojaAI – Career Bridge Initiative"
+)
+
     else:
         # Quiz results content
         c.setFont("Helvetica-Bold", 20)
@@ -680,6 +697,7 @@ with tabs[6]:
     
    
     
+
 
 
 
