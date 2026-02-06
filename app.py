@@ -484,109 +484,117 @@ with tabs[4]:  # Tab 4 for Quiz
             user_score += 1
 
     if st.button("Submit Quiz"):
-        st.markdown("---")
-        st.markdown(f"### Your Score: {user_score}/{len(quiz)}")
-        passing_score = int(0.6 * len(quiz))  # 60% pass threshold
+    st.markdown("---")
+    st.markdown(f"### Your Score: {user_score}/{len(quiz)}")
+    passing_score = int(0.6 * len(quiz))  # 60% pass threshold
 
-        if user_score >= passing_score:
-            st.success("🎉 Congratulations! You passed!")
-            passed = True
-        else:
-            st.error("😢 Sorry, you did not pass.")
-            passed = False
+    if user_score >= passing_score:
+        st.success("🎉 Congratulations! You passed!")
+        passed = True
+    else:
+        st.error("😢 Sorry, you did not pass.")
+        passed = False
 
+    # Step 4: Generate PDF certificate or results
+    from reportlab.lib.pagesizes import letter
+    from reportlab.pdfgen import canvas
+    from reportlab.lib import colors
+    from io import BytesIO
+    import datetime, random
+
+    pdf_buffer = BytesIO()
+    c = canvas.Canvas(pdf_buffer, pagesize=letter)
+    width, height = letter
+
+    # Cream-white background
+    c.setFillColorRGB(1, 0.992, 0.925)  # cream white
+    c.rect(0, 0, width, height, fill=1, stroke=0)
+
+    # Decorative double border in brown
+    c.setStrokeColorRGB(0.4, 0.26, 0.13)  # brown
+    c.setLineWidth(4)
+    c.rect(20, 20, width-40, height-40)
+    c.setLineWidth(2)
+    c.rect(30, 30, width-60, height-60)
+
+    # Institution header
+    c.setFont("Helvetica-Bold", 20)
+    c.setFillColorRGB(0.0, 0.2, 0.0)  # dark green
+    c.drawCentredString(width/2, height - 50, "UmojaAI – Career Bridge Initiative")
+
+    c.setFont("Helvetica", 11)
+    c.setFillColorRGB(0, 0, 0)  # black for subtitle
+    c.drawCentredString(
+        width/2,
+        height - 70,
+        "An AI-powered career guidance and digital skills initiative"
+    )
+
+    # Watermark placeholder
+    c.setFont("Helvetica-Bold", 50)
+    c.setFillColorRGB(0.9,0.9,0.9)
+    c.saveState()
+    c.translate(width/2 - 150, height/2 - 50)
+    c.rotate(30)
+    c.drawCentredString(0, 0, "UmojaAI")
+    c.restoreState()
+    c.setFillColorRGB(0, 0, 0)
+
+    if passed:
+        # Certificate design
+        c.setFont("Helvetica-Bold", 32)
+        c.setFillColorRGB(0.0, 0.2, 0.0)  # dark green
+        c.drawCentredString(width/2, height - 130, "Certificate of Achievement")
         
-         # Step 4: Generate PDF certificate or results
-        from reportlab.lib.pagesizes import letter
-        from reportlab.pdfgen import canvas
-        from reportlab.lib import colors
-        from io import BytesIO
-        import datetime, random
+        c.setFont("Helvetica", 16)
+        c.setFillColorRGB(0, 0, 0)
+        c.drawCentredString(width/2, height - 180, "This certificate is proudly awarded to")
+        
+        c.setFont("Helvetica-Bold", 24)
+        c.drawCentredString(width/2, height - 230, name)
+        
+        c.setFont("Helvetica", 16)
+        c.drawCentredString(
+            width/2,
+            height - 280,
+            "For successfully demonstrating foundational knowledge in Artificial Intelligence"
+        )
+        c.drawCentredString(width/2, height - 310, f"Score: {user_score}/{len(quiz)}")
+        c.drawCentredString(width/2, height - 340, f"Date: {datetime.date.today().strftime('%B %d, %Y')}")
+        c.drawCentredString(width/2, height - 360, "Issued in South Africa")
 
-        pdf_buffer = BytesIO()
-        c = canvas.Canvas(pdf_buffer, pagesize=letter)
-        width, height = letter
+        # Certificate ID
+        cert_id = f"UBC-{datetime.date.today().strftime('%Y%m%d')}-{random.randint(1000,9999)}"
+        c.setFont("Helvetica-Oblique", 10)
+        c.drawRightString(width - 40, 40, f"Certificate ID: {cert_id}")
 
-        # Gradient-like background
-        c.saveState()
-        for i in range(0, int(height), 5):
-            c.setFillColorRGB(0.93, 0.95 - i/2000, 1)  # Light gradient from blue to white
-            c.rect(0, i, width, 5, fill=1, stroke=0)
-        c.restoreState()
-
-        # Decorative double border
-        c.setStrokeColor(colors.darkblue)
-        c.setLineWidth(4)
-        c.rect(20, 20, width-40, height-40)
-        c.setLineWidth(2)
-        c.rect(30, 30, width-60, height-60)
-
-        # Institution header
+        # Signature line with your name
+        c.line(80, 80, 280, 80)
+        c.setFont("Helvetica-BoldOblique", 12)
+        c.drawString(120, 82, "LM Ndlazi")  # Director Signature above line
+        c.setFont("Helvetica", 10)
+        c.drawString(120, 68, "Programme Lead, UmojaAI – Career Bridge Initiative")
+    else:
+        # Results PDF
         c.setFont("Helvetica-Bold", 20)
-        c.setFillColor(colors.darkblue)
-        c.drawCentredString(width/2, height - 50, "UmojaAI Inclusive")
-        c.setFont("Helvetica-Oblique", 12)
-        c.setFillColor(colors.black)
-        c.drawCentredString(width/2, height - 70, "Empowering Everyone Through AI")
+        c.drawCentredString(width/2, height - 100, "Quiz Results")
+        c.setFont("Helvetica", 14)
+        c.drawString(50, height - 150, f"Name: {name}")
+        c.drawString(50, height - 170, f"Email: {email}")
+        c.drawString(50, height - 200, f"Score: {user_score}/{len(quiz)}")
+        c.drawString(50, height - 230, f"Passing Score: {passing_score}/{len(quiz)}")
+        c.drawString(50, height - 260, "Detailed Results:")
+        y_pos = height - 290
+        for q_text, ua, ca in user_responses:
+            c.drawString(60, y_pos, f"Q: {q_text}")
+            y_pos -= 20
+            c.drawString(70, y_pos, f"Your Answer: {ua}")
+            y_pos -= 20
+            c.drawString(70, y_pos, f"Correct Answer: {ca}")
+            y_pos -= 30
 
-        # Watermark placeholder
-        c.setFont("Helvetica-Bold", 50)
-        c.setFillColorRGB(0.9,0.9,0.9)
-        c.saveState()
-        c.translate(width/2 - 150, height/2 - 50)
-        c.rotate(30)
-        c.drawCentredString(0, 0, "UmojaAI")
-        c.restoreState()
-        c.setFillColor(colors.black)
-
-        if passed:
-            # Certificate design
-            c.setFont("Helvetica-Bold", 32)
-            c.setFillColor(colors.darkblue)
-            c.drawCentredString(width/2, height - 130, "Certificate of Achievement")
-            c.setFont("Helvetica", 16)
-            c.setFillColor(colors.black)
-            c.drawCentredString(width/2, height - 180, "This certificate is proudly awarded to")
-            c.setFont("Helvetica-Bold", 24)
-            c.drawCentredString(width/2, height - 230, name)
-            c.setFont("Helvetica", 16)
-            c.drawCentredString(width/2, height - 280, "For successfully passing the AI Knowledge Quiz")
-            c.drawCentredString(width/2, height - 310, f"Score: {user_score}/{len(quiz)}")
-            c.drawCentredString(width/2, height - 340, f"Date: {datetime.date.today().strftime('%B %d, %Y')}")
-
-            # Certificate ID
-            cert_id = f"UMJ-{datetime.date.today().strftime('%Y%m%d')}-{random.randint(1000,9999)}"
-            c.setFont("Helvetica-Oblique", 10)
-            c.drawRightString(width - 40, 40, f"Certificate ID: {cert_id}")
-
-            # Signature line with your name
-            c.line(80, 80, 280, 80)
-            c.setFont("Helvetica-BoldOblique", 12)
-            c.drawString(120, 82, "LM Ndlazi")  # Director Signature above line
-            c.setFont("Helvetica", 10)
-            c.drawString(120, 68, "Director, UmojaAI Inclusive")
-        else:
-            # Results PDF
-            c.setFont("Helvetica-Bold", 20)
-            c.drawCentredString(width/2, height - 100, "Quiz Results")
-            c.setFont("Helvetica", 14)
-            c.drawString(50, height - 150, f"Name: {name}")
-            c.drawString(50, height - 170, f"Email: {email}")
-            c.drawString(50, height - 200, f"Score: {user_score}/{len(quiz)}")
-            c.drawString(50, height - 230, f"Passing Score: {passing_score}/{len(quiz)}")
-            c.drawString(50, height - 260, "Detailed Results:")
-            y_pos = height - 290
-            for q_text, ua, ca in user_responses:
-                c.drawString(60, y_pos, f"Q: {q_text}")
-                y_pos -= 20
-                c.drawString(70, y_pos, f"Your Answer: {ua}")
-                y_pos -= 20
-                c.drawString(70, y_pos, f"Correct Answer: {ca}")
-                y_pos -= 30
-
-        c.showPage()
-        c.save()
-        pdf_buffer.seek(0)
+    c.save()
+    pdf_buffer.seek(0)
 
         # Step 5: Download button
         if passed:
@@ -653,6 +661,7 @@ with tabs[6]:
     
    
     
+
 
 
 
