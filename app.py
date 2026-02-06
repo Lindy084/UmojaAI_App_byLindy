@@ -440,6 +440,7 @@ with tabs[3]:
 # 📚 AI Knowledge Quiz App
 # ------------------------
 st.set_page_config(page_title="AI Knowledge Quiz", layout="wide")
+
 st.title("📚 AI Knowledge Quiz")
 
 # Step 1: User details
@@ -526,9 +527,8 @@ if st.button("Submit Quiz"):
     score_percent = round(user_score / len(quiz) * 100, 2)
     passing_score = 60
     user_responses = [(q['question'], user_answers[i], q['answer']) for i, q in enumerate(quiz)]
+    passed = user_score >= int(len(quiz) * 0.6)
 
-    # Pass/Fail message
-    passed = user_score >= passing_score
     if passed:
         st.success(f"🎉 Congratulations {name}! You passed the {selected_topic} quiz with {score_percent}%.")
     else:
@@ -564,7 +564,7 @@ if st.button("Submit Quiz"):
     c.setFillColorRGB(0.9, 0.9, 0.9)
     c.translate(width/2, height/2)
     c.rotate(30)
-    c.drawCentredString(0, 0, "UmojaAI – Career Bridge")
+    c.drawCentredString(0, 0, "UmojaAI – Career Bridge ")
     c.restoreState()
 
     if passed:
@@ -586,27 +586,18 @@ if st.button("Submit Quiz"):
         c.setFont("Helvetica-Oblique", 10)
         c.drawRightString(width - 40, 40, f"Certificate ID: {cert_id}")
 
-        # -------------------------
-        # Signature (Aligned like Certificate ID)
-        # -------------------------
+        # Signature
         sig_x = 60
         sig_y = 55
-
-        # Signature line
         c.setStrokeColorRGB(0.4, 0.26, 0.13)
         c.setLineWidth(1.2)
         c.line(sig_x, sig_y, sig_x + 160, sig_y)
-
-        # Signature name (handwritten style)
         c.setFont("Times-Italic", 12)
         c.setFillColorRGB(0.0, 0.2, 0.0)
         c.drawString(sig_x + 10, sig_y + 8, "LM Ndlazi")
-
-        # Signature title
         c.setFont("Helvetica-Oblique", 9)
         c.setFillColorRGB(0, 0, 0)
         c.drawString(sig_x, sig_y - 14, "Programme Lead · UmojaAI – Career Bridge Initiative")
-
     else:
         # Quiz results content
         c.setFont("Helvetica-Bold", 20)
@@ -635,17 +626,16 @@ if st.button("Submit Quiz"):
         st.download_button(
             label="📥 Download Certificate",
             data=pdf_buffer,
-            file_name=f"{name}_certificate.pdf",
+            file_name=f"{name}_{selected_topic}_certificate.pdf",
             mime="application/pdf"
         )
     else:
         st.download_button(
             label="📥 Download Results",
             data=pdf_buffer,
-            file_name=f"{name}_quiz_results.pdf",
+            file_name=f"{name}_{selected_topic}_quiz_results.pdf",
             mime="application/pdf"
         )
-
 
 
 
@@ -698,6 +688,7 @@ with tabs[6]:
     
    
     
+
 
 
 
