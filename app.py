@@ -483,7 +483,7 @@ with tabs[4]:  # Tab 4 for Quiz
         if user_answer == q["answer"]:
             user_score += 1
 
-    if st.button("Submit Quiz"):
+   if st.button("Submit Quiz"):
     st.markdown("---")
     st.markdown(f"### Your Score: {user_score}/{len(quiz)}")
     passing_score = int(0.6 * len(quiz))  # 60% pass threshold
@@ -495,10 +495,11 @@ with tabs[4]:  # Tab 4 for Quiz
         st.error("😢 Sorry, you did not pass.")
         passed = False
 
-    # Step 4: Generate PDF certificate or results
+    # PDF generation
     from reportlab.lib.pagesizes import letter
     from reportlab.pdfgen import canvas
     from reportlab.lib import colors
+    from reportlab.lib.units import inch
     from io import BytesIO
     import datetime, random
 
@@ -506,76 +507,100 @@ with tabs[4]:  # Tab 4 for Quiz
     c = canvas.Canvas(pdf_buffer, pagesize=letter)
     width, height = letter
 
-    # Cream-white background
-    c.setFillColorRGB(1, 0.992, 0.925)  # cream white
+    # -------------------------
+    # Background & Borders
+    # -------------------------
+    c.setFillColorRGB(1, 0.992, 0.925)  # cream-white
     c.rect(0, 0, width, height, fill=1, stroke=0)
 
-    # Decorative double border in brown
-    c.setStrokeColorRGB(0.4, 0.26, 0.13)  # brown
-    c.setLineWidth(4)
+    # Outer border - brown
+    c.setStrokeColorRGB(0.4, 0.26, 0.13)
+    c.setLineWidth(5)
     c.rect(20, 20, width-40, height-40)
+
+    # Inner border - brown thinner
     c.setLineWidth(2)
-    c.rect(30, 30, width-60, height-60)
+    c.rect(35, 35, width-70, height-70)
 
-    # Institution header
-    c.setFont("Helvetica-Bold", 20)
+    # -------------------------
+    # Header / Issuer
+    # -------------------------
+    c.setFont("Times-Bold", 22)
     c.setFillColorRGB(0.0, 0.2, 0.0)  # dark green
-    c.drawCentredString(width/2, height - 50, "UmojaAI – Career Bridge Initiative")
+    c.drawCentredString(width/2, height - 70, "UmojaAI – Career Bridge Initiative")
 
-    c.setFont("Helvetica", 11)
-    c.setFillColorRGB(0, 0, 0)  # black for subtitle
+    c.setFont("Helvetica-Oblique", 11)
+    c.setFillColorRGB(0, 0, 0)
     c.drawCentredString(
         width/2,
-        height - 70,
+        height - 90,
         "An AI-powered career guidance and digital skills initiative"
     )
 
-    # Watermark placeholder
-    c.setFont("Helvetica-Bold", 50)
-    c.setFillColorRGB(0.9,0.9,0.9)
+    # -------------------------
+    # Watermark
+    # -------------------------
     c.saveState()
-    c.translate(width/2 - 150, height/2 - 50)
+    c.setFont("Helvetica-Bold", 50)
+    c.setFillColorRGB(0.9, 0.9, 0.9)
+    c.translate(width/2, height/2)
     c.rotate(30)
-    c.drawCentredString(0, 0, "UmojaAI")
+    c.drawCentredString(0, 0, "UmojaAI – Career Bridge Initiative")
     c.restoreState()
-    c.setFillColorRGB(0, 0, 0)
 
     if passed:
-        # Certificate design
-        c.setFont("Helvetica-Bold", 32)
-        c.setFillColorRGB(0.0, 0.2, 0.0)  # dark green
-        c.drawCentredString(width/2, height - 130, "Certificate of Achievement")
-        
+        # -------------------------
+        # Certificate Title
+        # -------------------------
+        c.setFont("Times-Bold", 34)
+        c.setFillColorRGB(0.0, 0.2, 0.0)
+        c.drawCentredString(width/2, height - 150, "Certificate of Achievement")
+
+        # -------------------------
+        # Awardee Info
+        # -------------------------
         c.setFont("Helvetica", 16)
         c.setFillColorRGB(0, 0, 0)
-        c.drawCentredString(width/2, height - 180, "This certificate is proudly awarded to")
-        
-        c.setFont("Helvetica-Bold", 24)
-        c.drawCentredString(width/2, height - 230, name)
-        
+        c.drawCentredString(width/2, height - 200, "This certificate is proudly awarded to")
+
+        c.setFont("Times-Bold", 26)
+        c.drawCentredString(width/2, height - 250, name)
+
+        # -------------------------
+        # Achievement Description
+        # -------------------------
         c.setFont("Helvetica", 16)
         c.drawCentredString(
             width/2,
-            height - 280,
+            height - 300,
             "For successfully demonstrating foundational knowledge in Artificial Intelligence"
         )
-        c.drawCentredString(width/2, height - 310, f"Score: {user_score}/{len(quiz)}")
-        c.drawCentredString(width/2, height - 340, f"Date: {datetime.date.today().strftime('%B %d, %Y')}")
-        c.drawCentredString(width/2, height - 360, "Issued in South Africa")
+        c.drawCentredString(width/2, height - 330, f"Score: {user_score}/{len(quiz)}")
+        c.drawCentredString(width/2, height - 360, f"Date: {datetime.date.today().strftime('%B %d, %Y')}")
+        c.drawCentredString(width/2, height - 380, "Issued in South Africa")
 
+        # -------------------------
         # Certificate ID
+        # -------------------------
         cert_id = f"UBC-{datetime.date.today().strftime('%Y%m%d')}-{random.randint(1000,9999)}"
         c.setFont("Helvetica-Oblique", 10)
         c.drawRightString(width - 40, 40, f"Certificate ID: {cert_id}")
 
-        # Signature line with your name
-        c.line(80, 80, 280, 80)
+        # -------------------------
+        # Signature
+        # -------------------------
+        c.setStrokeColorRGB(0.4, 0.26, 0.13)  # brown line
+        c.line(80, 90, 280, 90)
         c.setFont("Helvetica-BoldOblique", 12)
-        c.drawString(120, 82, "LM Ndlazi")  # Director Signature above line
+        c.setFillColorRGB(0.0, 0.2, 0.0)
+        c.drawString(120, 92, "LM Ndlazi")  # Signature name
         c.setFont("Helvetica", 10)
-        c.drawString(120, 68, "Programme Lead, UmojaAI – Career Bridge Initiative")
+        c.drawString(120, 76, "Programme Lead, UmojaAI – Career Bridge Initiative")
+
     else:
-        # Results PDF
+        # -------------------------
+        # Quiz Results PDF
+        # -------------------------
         c.setFont("Helvetica-Bold", 20)
         c.drawCentredString(width/2, height - 100, "Quiz Results")
         c.setFont("Helvetica", 14)
@@ -661,6 +686,7 @@ with tabs[6]:
     
    
     
+
 
 
 
