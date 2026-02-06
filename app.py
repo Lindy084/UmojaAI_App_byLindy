@@ -564,7 +564,7 @@ if st.button("Submit Quiz"):
     c.setFillColorRGB(0.9, 0.9, 0.9)
     c.translate(width/2, height/2)
     c.rotate(30)
-    c.drawCentredString(0, 0, "UmojaAI – Career Bridge Initiative")
+    c.drawCentredString(0, 0, "UmojaAI – Career Bridge ")
     c.restoreState()
 
     if user_score >= int(len(quiz) * 0.6):
@@ -585,68 +585,72 @@ if st.button("Submit Quiz"):
         cert_id = f"UBC-{datetime.date.today().strftime('%Y%m%d')}-{random.randint(1000,9999)}"
         c.setFont("Helvetica-Oblique", 10)
         c.drawRightString(width - 40, 40, f"Certificate ID: {cert_id}")
-  # -------------------------
-# Signature (Aligned like Certificate ID)
-# -------------------------
-sig_x = 60
-sig_y = 55  # aligned visually with Certificate ID height
+if passed:
+    # -------------------------
+    # Signature (Aligned like Certificate ID)
+    # -------------------------
+    sig_x = 60
+    sig_y = 55  # aligned visually with Certificate ID height
 
-# Signature line
-c.setStrokeColorRGB(0.4, 0.26, 0.13)  # brown
-c.setLineWidth(1.2)
-c.line(sig_x, sig_y, sig_x + 160, sig_y)
+    # Signature line
+    c.setStrokeColorRGB(0.4, 0.26, 0.13)  # brown
+    c.setLineWidth(1.2)
+    c.line(sig_x, sig_y, sig_x + 160, sig_y)
 
-# Signature name (handwritten style)
-c.setFont("Times-Italic", 12)
-c.setFillColorRGB(0.0, 0.2, 0.0)  # dark green
-c.drawString(sig_x + 10, sig_y + 8, "LM Ndlazi")
+    # Signature name (handwritten style)
+    c.setFont("Times-Italic", 12)
+    c.setFillColorRGB(0.0, 0.2, 0.0)  # dark green
+    c.drawString(sig_x + 10, sig_y + 8, "LM Ndlazi")
 
-# Signature title
-c.setFont("Helvetica-Oblique", 9)
-c.setFillColorRGB(0, 0, 0)
-c.drawString(
-    sig_x,
-    sig_y - 14,
-    "Programme Lead · UmojaAI – Career Bridge Initiative"
-)
+    # Signature title
+    c.setFont("Helvetica-Oblique", 9)
+    c.setFillColorRGB(0, 0, 0)
+    c.drawString(
+        sig_x,
+        sig_y - 14,
+        "Programme Lead · UmojaAI – Career Bridge Initiative"
+    )
 
-    else:
-        # Quiz results content
-        c.setFont("Helvetica-Bold", 20)
-        c.drawCentredString(width/2, height - 100, f"{selected_topic} Quiz Results")
-        c.setFont("Helvetica", 14)
-        c.drawString(50, height - 150, f"Name: {name}")
-        c.drawString(50, height - 170, f"Email: {email}")
-        c.drawString(50, height - 200, f"Score: {score_percent}% ({user_score}/{len(quiz)})")
-        c.drawString(50, height - 230, f"Passing Score: {passing_score}%")
-        c.drawString(50, height - 260, "Detailed Results:")
-        y_pos = height - 290
-        for q_text, ua, ca in user_responses:
-            c.drawString(60, y_pos, f"Q: {q_text}")
-            y_pos -= 20
-            c.drawString(70, y_pos, f"Your Answer: {ua}")
-            y_pos -= 20
-            c.drawString(70, y_pos, f"Correct Answer: {ca}")
-            y_pos -= 30
+else:
+    # Quiz results content
+    c.setFont("Helvetica-Bold", 20)
+    c.drawCentredString(width/2, height - 100, f"{selected_topic} Quiz Results")
 
-    c.save()
-    pdf_buffer.seek(0)
+    c.setFont("Helvetica", 14)
+    c.drawString(50, height - 150, f"Name: {name}")
+    c.drawString(50, height - 170, f"Email: {email}")
+    c.drawString(50, height - 200, f"Score: {score_percent}% ({user_score}/{len(quiz)})")
+    c.drawString(50, height - 230, f"Passing Score: {passing_score}%")
+    c.drawString(50, height - 260, "Detailed Results:")
 
-    # Download button
-    if user_score >= int(len(quiz) * 0.6):
-        st.download_button(
-            label="📥 Download Certificate",
-            data=pdf_buffer,
-            file_name=f"{name}_certificate.pdf",
-            mime="application/pdf"
-        )
-    else:
-        st.download_button(
-            label="📥 Download Results",
-            data=pdf_buffer,
-            file_name=f"{name}_quiz_results.pdf",
-            mime="application/pdf"
-        )
+    y_pos = height - 290
+    for q_text, ua, ca in user_responses:
+        c.drawString(60, y_pos, f"Q: {q_text}")
+        y_pos -= 20
+        c.drawString(70, y_pos, f"Your Answer: {ua}")
+        y_pos -= 20
+        c.drawString(70, y_pos, f"Correct Answer: {ca}")
+        y_pos -= 30
+
+c.save()
+pdf_buffer.seek(0)
+
+# Download button
+if user_score >= int(len(quiz) * 0.6):
+    st.download_button(
+        label="📥 Download Certificate",
+        data=pdf_buffer,
+        file_name=f"{name}_certificate.pdf",
+        mime="application/pdf"
+    )
+else:
+    st.download_button(
+        label="📥 Download Results",
+        data=pdf_buffer,
+        file_name=f"{name}_quiz_results.pdf",
+        mime="application/pdf"
+    )
+
 
 # ------------------------
 # 🌍 Story
@@ -697,6 +701,7 @@ with tabs[6]:
     
    
     
+
 
 
 
