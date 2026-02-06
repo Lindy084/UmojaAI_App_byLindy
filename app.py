@@ -580,6 +580,13 @@ with tabs[4]:  # Tab 4 for Quiz
             cert_id = f"UBC-{datetime.date.today().strftime('%Y%m%d')}-{random.randint(1000,9999)}"
             c.setFont("Helvetica-Oblique", 10)
             c.drawRightString(width - 40, 40, f"Certificate ID: {cert_id}")
+            # Signature line
+c.line(width/2 - 100, height - 450, width/2 + 100, height - 450)  # line
+c.setFont("Helvetica-Bold", 12)
+c.drawCentredString(width/2, height - 465, "LM Ndlazi")  # Your signature name
+c.setFont("Helvetica", 10)
+c.drawCentredString(width/2, height - 480, "Programme Lead, UmojaAI – Career Bridge Initiative")
+
         else:
             # Quiz results content
             c.setFont("Helvetica-Bold", 20)
@@ -667,6 +674,7 @@ with tabs[6]:
     
    
     
+
 
 
 
